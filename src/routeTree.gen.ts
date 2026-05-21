@@ -9,18 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TrendsRouteImport } from './routes/trends'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as InquiryRouteImport } from './routes/inquiry'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
-const TrendsRoute = TrendsRouteImport.update({
-  id: '/trends',
-  path: '/trends',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -53,7 +47,6 @@ export interface FileRoutesByFullPath {
   '/inquiry': typeof InquiryRoute
   '/products': typeof ProductsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/trends': typeof TrendsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +54,6 @@ export interface FileRoutesByTo {
   '/inquiry': typeof InquiryRoute
   '/products': typeof ProductsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/trends': typeof TrendsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,27 +62,13 @@ export interface FileRoutesById {
   '/inquiry': typeof InquiryRoute
   '/products': typeof ProductsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/trends': typeof TrendsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/inquiry'
-    | '/products'
-    | '/sitemap.xml'
-    | '/trends'
+  fullPaths: '/' | '/about' | '/inquiry' | '/products' | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/inquiry' | '/products' | '/sitemap.xml' | '/trends'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/inquiry'
-    | '/products'
-    | '/sitemap.xml'
-    | '/trends'
+  to: '/' | '/about' | '/inquiry' | '/products' | '/sitemap.xml'
+  id: '__root__' | '/' | '/about' | '/inquiry' | '/products' | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -99,18 +77,10 @@ export interface RootRouteChildren {
   InquiryRoute: typeof InquiryRoute
   ProductsRoute: typeof ProductsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  TrendsRoute: typeof TrendsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/trends': {
-      id: '/trends'
-      path: '/trends'
-      fullPath: '/trends'
-      preLoaderRoute: typeof TrendsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -155,8 +125,17 @@ const rootRouteChildren: RootRouteChildren = {
   InquiryRoute: InquiryRoute,
   ProductsRoute: ProductsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  TrendsRoute: TrendsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

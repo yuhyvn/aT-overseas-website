@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, TrendingUp, Globe2, Award, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck, TrendingUp, Globe2, Award } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import heroImg from "@/assets/hero-kfood.jpg";
 import { products } from "@/data/products";
@@ -20,26 +20,27 @@ function HomePage() {
   return (
     <SiteLayout>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-hero text-navy-foreground">
-        <div className="absolute inset-0 opacity-30 mix-blend-overlay">
-          <img src={heroImg} alt="" className="h-full w-full object-cover" width={1920} height={1080} />
+      <section className="relative overflow-hidden bg-navy-deep text-navy-foreground">
+        <div className="absolute inset-0">
+          <img src={heroImg} alt="" className="h-full w-full object-cover opacity-55" width={1920} height={1080} />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/85 via-navy-deep/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep via-navy-deep/85 to-navy-deep/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/70 via-transparent to-transparent" />
         <div className="container-page relative grid gap-12 py-24 lg:grid-cols-12 lg:py-32">
           <div className="lg:col-span-7">
-            <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-white/85 backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-brand-green" /> Official B2B Platform — aT New York Branch
+            <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-white/80 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-green" /> Official B2B Platform — aT New York Branch
             </div>
             <h1 className="animate-fade-up mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
               Connecting Korean Food <br />
-              <span className="text-brand-green">to the U.S. Market.</span>
+              <span className="text-white/90">to the U.S. Market.</span>
             </h1>
             <p className="animate-fade-up mt-6 max-w-xl text-lg leading-relaxed text-white/80" style={{ animationDelay: "80ms" }}>
               A trusted gateway for U.S. buyers, distributors, retailers, and Korean restaurants
               to discover certified Korean food products and verified suppliers.
             </p>
             <div className="animate-fade-up mt-9 flex flex-wrap gap-3" style={{ animationDelay: "160ms" }}>
-              <Link to="/products" className="group inline-flex items-center gap-2 rounded-md bg-brand-green px-6 py-3.5 text-sm font-semibold text-white shadow-elegant transition hover:brightness-110">
+              <Link to="/products" className="group inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 text-sm font-semibold text-navy-deep shadow-card transition hover:bg-white/90">
                 Explore Products <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link to="/inquiry" className="inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10">

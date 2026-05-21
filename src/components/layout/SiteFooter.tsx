@@ -24,7 +24,7 @@ export function SiteFooter() {
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Platform</div>
           <ul className="mt-4 space-y-2.5 text-sm">
             <li><Link to="/products" className="text-white/80 hover:text-white">Featured Products</Link></li>
-            <li><Link to="/trends" className="text-white/80 hover:text-white">Market Trends</Link></li>
+            
             <li><Link to="/inquiry" className="text-white/80 hover:text-white">Buyer Inquiry</Link></li>
             <li><Link to="/about" className="text-white/80 hover:text-white">About aT NY</Link></li>
           </ul>

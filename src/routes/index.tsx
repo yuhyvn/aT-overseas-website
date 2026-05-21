@@ -40,7 +40,7 @@ function HomePage() {
               to discover certified Korean food products and verified suppliers.
             </p>
             <div className="animate-fade-up mt-9 flex flex-wrap gap-3" style={{ animationDelay: "160ms" }}>
-              <Link to="/products" className="group inline-flex items-center gap-2 rounded-md bg-brand-green px-6 py-3.5 text-sm font-semibold text-white shadow-elegant transition hover:brightness-110">
+              <Link to="/products" className="group inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 text-sm font-semibold text-navy-deep shadow-card transition hover:bg-white/90">
                 Explore Products <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link to="/inquiry" className="inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10">

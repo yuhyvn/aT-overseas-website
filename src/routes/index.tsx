@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, TrendingUp, Globe2, Award, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck, TrendingUp, Globe2, Award } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import heroImg from "@/assets/hero-kfood.jpg";
 import { products } from "@/data/products";

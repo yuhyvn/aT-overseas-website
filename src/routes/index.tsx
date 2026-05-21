@@ -147,6 +147,75 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Latest Updates */}
+      <section className="container-page py-24">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-xl">
+            <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Latest Updates</div>
+            <h2 className="mt-3 font-display text-3xl font-bold text-navy sm:text-4xl">
+              News, events, and insights from the K-Food trade desk.
+            </h2>
+          </div>
+          <span className="text-sm text-muted-foreground">
+            Updates from aT New York
+          </span>
+        </div>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {updates.map((u, i) => {
+            const meta = updateCategoryMeta[u.category];
+            const Icon = meta.icon;
+            const isFeatured = i === 0;
+            return (
+              <div
+                key={u.id}
+                className={`group flex flex-col rounded-xl border border-border bg-card p-6 shadow-card transition hover:-translate-y-0.5 hover:shadow-elegant ${isFeatured ? "lg:col-span-2 lg:flex-row lg:items-start lg:gap-8" : ""}`}
+              >
+                <div className={`flex-1 ${isFeatured ? "lg:max-w-md" : ""}`}>
+                  <div className="flex items-center gap-3">
+                    <div className={`inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground`}>
+                      <Icon className={`h-3.5 w-3.5 ${meta.accent}`} />
+                      {meta.label}
+                    </div>
+                    <span className="text-xs text-muted-foreground">{u.date}</span>
+                  </div>
+                  <h3 className="mt-4 font-display text-lg font-semibold leading-snug text-navy group-hover:text-navy/80">
+                    {u.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                    {u.summary}
+                  </p>
+                  {u.location && (
+                    <div className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {u.location}
+                    </div>
+                  )}
+                </div>
+                {u.actionLabel && u.actionHref && (
+                  <div className={`mt-5 flex items-center gap-1.5 text-sm font-semibold text-navy transition group-hover:gap-2 ${isFeatured ? "lg:mt-0 lg:self-end" : ""}`}>
+                    {u.actionHref.startsWith("/") ? (
+                      <Link to={u.actionHref} className="inline-flex items-center gap-1.5">
+                        {u.actionLabel} <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    ) : (
+                      <a href={u.actionHref} className="inline-flex items-center gap-1.5">
+                        {u.actionLabel} <ArrowRight className="h-4 w-4" />
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <CalendarDays className="h-4 w-4" />
+          <span>Last updated: May 20, 2026</span>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="container-page py-24">
         <div className="relative overflow-hidden rounded-2xl bg-gradient-hero p-12 text-navy-foreground sm:p-16">

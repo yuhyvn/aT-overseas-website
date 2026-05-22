@@ -69,7 +69,7 @@ function ProgramDetailPage() {
           <div>
             <h2 className="font-display text-xl font-semibold text-navy">What the program includes</h2>
             <ul className="mt-6 space-y-4">
-              {program.highlights.map((h) => (
+              {program.highlights.map((h: string) => (
                 <li key={h} className="flex items-start gap-3 rounded-lg border border-border bg-card p-4 shadow-card">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-green" />
                   <span className="text-sm leading-relaxed text-foreground/80">{h}</span>

@@ -4,19 +4,19 @@ import { z } from "zod";
 import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 
-export const Route = createFileRoute("/inquiry")({
+export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Buyer Inquiry — aT New York K-Food Platform" },
-      { name: "description", content: "Submit a buyer inquiry to source verified Korean food suppliers. aT New York responds within 48 hours." },
-      { property: "og:title", content: "Buyer Inquiry — aT NY" },
-      { property: "og:description", content: "Connect with verified Korean suppliers via aT New York." },
+      { title: "Contact — aT New York K-Food Platform" },
+      { name: "description", content: "Contact aT New York to source verified Korean food suppliers, join trade programs, or get U.S. market guidance. Response within 48 hours." },
+      { property: "og:title", content: "Contact — aT New York" },
+      { property: "og:description", content: "Get in touch with Korea's official agri-food trade office in the United States." },
     ],
   }),
-  component: InquiryPage,
+  component: ContactPage,
 });
 
-const categories = ["Ramen","Kimchi","Snacks","Frozen Foods","Beverages","Sauces & Seasonings","Other"];
+const categories = ["Ramen","Kimchi","Snacks","Frozen Foods","Beverages","Sauces & Seasonings","Health Foods","Programs / General","Other"];
 
 const schema = z.object({
   company: z.string().trim().min(2, "Company name is required").max(120),
@@ -27,7 +27,7 @@ const schema = z.object({
   details: z.string().trim().min(10, "Please share a few details").max(1500),
 });
 
-function InquiryPage() {
+function ContactPage() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -49,13 +49,13 @@ function InquiryPage() {
     <SiteLayout>
       <section className="border-b border-border bg-secondary/40">
         <div className="container-page py-20">
-          <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Buyer Inquiry</div>
+          <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Contact</div>
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-navy sm:text-5xl">
-            Connect with verified Korean suppliers.
+            Get in touch with aT New York.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Tell us what you're sourcing. Our New York team responds within 48 business hours with
-            shortlisted manufacturers, sample availability, and pricing guidance.
+            Whether you're sourcing Korean food products, joining a trade program, or seeking U.S. market
+            guidance — our team responds within 48 business hours.
           </p>
         </div>
       </section>
@@ -67,7 +67,7 @@ function InquiryPage() {
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-green/15 text-brand-green">
                 <CheckCircle2 className="h-7 w-7" />
               </div>
-              <h2 className="mt-5 font-display text-2xl font-bold text-navy">Inquiry received</h2>
+              <h2 className="mt-5 font-display text-2xl font-bold text-navy">Message received</h2>
               <p className="mt-2 max-w-md text-sm text-muted-foreground">
                 Thank you. The aT New York team will review your request and follow up at your
                 email within 48 business hours.
@@ -83,20 +83,20 @@ function InquiryPage() {
               </div>
 
               <div>
-                <Label>Interested product category</Label>
+                <Label>Topic of interest</Label>
                 <select
                   name="category"
                   defaultValue=""
                   className="mt-1.5 w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/15"
                 >
-                  <option value="" disabled>Select a category…</option>
+                  <option value="" disabled>Select a topic…</option>
                   {categories.map((c) => <option key={c}>{c}</option>)}
                 </select>
                 {errors.category && <p className="mt-1 text-xs text-destructive">{errors.category}</p>}
               </div>
 
               <div>
-                <Label>Inquiry details</Label>
+                <Label>Message</Label>
                 <textarea
                   name="details"
                   rows={5}
@@ -111,7 +111,7 @@ function InquiryPage() {
                 type="submit"
                 className="mt-2 inline-flex items-center justify-center rounded-md bg-navy px-6 py-3 text-sm font-semibold text-navy-foreground shadow-card transition hover:bg-navy-deep"
               >
-                Submit Inquiry
+                Send Message
               </button>
               <p className="text-xs text-muted-foreground">
                 By submitting, you consent to aT New York contacting you regarding your inquiry.

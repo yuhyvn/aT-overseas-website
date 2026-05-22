@@ -82,7 +82,7 @@ export const updates: Update[] = [
     date: "2026-05-05",
     location: "Virtual / New York, NY",
     actionLabel: "Apply now",
-    actionHref: "/inquiry",
+    actionHref: "/contact",
   },
   {
     id: "up-004",

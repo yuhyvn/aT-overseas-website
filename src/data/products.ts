@@ -4,6 +4,7 @@ import snacks from "@/assets/cat-snacks.jpg";
 import frozen from "@/assets/cat-frozen.jpg";
 import beverages from "@/assets/cat-beverages.jpg";
 import sauces from "@/assets/cat-sauces.jpg";
+import health from "@/assets/cat-health.jpg";
 
 export type Product = {
   slug: string;
@@ -44,15 +45,6 @@ export const products: Product[] = [
     certifications: ["FDA", "HACCP"],
   },
   {
-    slug: "frozen",
-    name: "Frozen Mandu & Tteokbokki",
-    category: "Frozen Foods",
-    image: frozen,
-    description: "Cold-chain certified frozen dumplings, rice cakes, and ready meals with consistent U.S. distribution.",
-    availability: "In stock",
-    certifications: ["FDA", "HACCP"],
-  },
-  {
     slug: "beverages",
     name: "Korean Beverages & Soju",
     category: "Beverages",
@@ -62,6 +54,15 @@ export const products: Product[] = [
     certifications: ["FDA"],
   },
   {
+    slug: "frozen",
+    name: "Frozen Mandu & Tteokbokki",
+    category: "Frozen Foods",
+    image: frozen,
+    description: "Cold-chain certified frozen dumplings, rice cakes, and ready meals with consistent U.S. distribution.",
+    availability: "In stock",
+    certifications: ["FDA", "HACCP"],
+  },
+  {
     slug: "sauces",
     name: "Sauces & Seasonings",
     category: "Sauces & Seasonings",
@@ -69,5 +70,14 @@ export const products: Product[] = [
     description: "Gochujang, doenjang, soy sauces, and BBQ marinades — the building blocks of authentic Korean cuisine.",
     availability: "In stock",
     certifications: ["FDA", "HACCP", "Halal"],
+  },
+  {
+    slug: "health",
+    name: "Korean Health Foods",
+    category: "Health Foods",
+    image: health,
+    description: "Red ginseng, honey citron tea, omija tonics, and traditional Korean functional foods for the wellness market.",
+    availability: "In stock",
+    certifications: ["FDA", "Organic"],
   },
 ];

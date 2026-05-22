@@ -3,13 +3,14 @@ import { ArrowRight, ShieldCheck, TrendingUp, Globe2, Award, CalendarDays, MapPi
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import heroImg from "@/assets/hero-kfood.jpg";
 import { products } from "@/data/products";
+import { programs } from "@/data/programs";
 import { updates, updateCategoryMeta } from "@/data/updates";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "aT New York — Connecting Korean Food to the U.S. Market" },
-      { name: "description", content: "B2B trade platform by Korea Agro-Fisheries & Food Trade Corporation New York. Discover certified Korean food products, suppliers, and U.S. market insights." },
+      { name: "description", content: "B2B trade platform by Korea Agro-Fisheries & Food Trade Corporation New York. Discover certified Korean food products, suppliers, and trade-promotion programs." },
       { property: "og:title", content: "aT New York — K-Food Trade Platform" },
       { property: "og:description", content: "Connecting Korean food to the U.S. market. Trusted by buyers, distributors, retailers, and restaurants." },
     ],
@@ -44,7 +45,7 @@ function HomePage() {
               <Link to="/products" className="group inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 text-sm font-semibold text-navy-deep shadow-card transition hover:bg-white/90">
                 Explore Products <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
-              <Link to="/inquiry" className="inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10">
+              <Link to="/contact" className="inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10">
                 Contact a Supplier
               </Link>
             </div>
@@ -90,7 +91,7 @@ function HomePage() {
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((p) => (
+          {products.slice(0, 6).map((p) => (
             <Link
               key={p.slug}
               to="/products"
@@ -109,9 +110,50 @@ function HomePage() {
         </div>
       </section>
 
-      {/* K-food intro */}
+      {/* Programs */}
       <section className="bg-secondary/50">
-        <div className="container-page grid gap-16 py-24 lg:grid-cols-2 lg:items-center">
+        <div className="container-page py-24">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-xl">
+              <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Programs</div>
+              <h2 className="mt-3 font-display text-3xl font-bold text-navy sm:text-4xl">
+                Trade-promotion programs that move K-food forward.
+              </h2>
+            </div>
+            <Link to="/programs" className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy hover:text-brand-green">
+              View all programs <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {programs.map((p, i) => (
+              <Link
+                key={p.slug}
+                to="/programs/$slug"
+                params={{ slug: p.slug }}
+                className="group flex flex-col rounded-xl border border-border bg-card p-7 shadow-card transition hover:-translate-y-0.5 hover:shadow-elegant"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-green/10 text-brand-green">
+                    <p.icon className="h-5 w-5" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">0{i + 1}</span>
+                </div>
+                <h3 className="mt-5 font-display text-lg font-semibold text-navy">{p.title}</h3>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-brand-green">{p.tagline}</p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">{p.summary}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-navy transition group-hover:gap-2">
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* K-food intro */}
+      <section className="container-page py-24">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           <div>
             <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> K-Food in America</div>
             <h2 className="mt-3 font-display text-3xl font-bold text-navy sm:text-4xl">
@@ -147,72 +189,50 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Latest Updates */}
-      <section className="container-page py-24">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-xl">
-            <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Latest Updates</div>
-            <h2 className="mt-3 font-display text-3xl font-bold text-navy sm:text-4xl">
-              News, events, and insights from the K-Food trade desk.
-            </h2>
+      {/* Notifications preview */}
+      <section className="bg-secondary/50">
+        <div className="container-page py-24">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-xl">
+              <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Notifications</div>
+              <h2 className="mt-3 font-display text-3xl font-bold text-navy sm:text-4xl">
+                News, events, and insights from the K-Food trade desk.
+              </h2>
+            </div>
+            <Link to="/notifications" className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy hover:text-brand-green">
+              View all notifications <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-          <span className="text-sm text-muted-foreground">
-            Updates from aT New York
-          </span>
-        </div>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {updates.map((u, i) => {
-            const meta = updateCategoryMeta[u.category];
-            const Icon = meta.icon;
-            const isFeatured = i === 0;
-            return (
-              <div
-                key={u.id}
-                className={`group flex flex-col rounded-xl border border-border bg-card p-6 shadow-card transition hover:-translate-y-0.5 hover:shadow-elegant ${isFeatured ? "lg:col-span-2 lg:flex-row lg:items-start lg:gap-8" : ""}`}
-              >
-                <div className={`flex-1 ${isFeatured ? "lg:max-w-md" : ""}`}>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {updates.slice(0, 3).map((u) => {
+              const meta = updateCategoryMeta[u.category];
+              const Icon = meta.icon;
+              return (
+                <div key={u.id} className="group flex flex-col rounded-xl border border-border bg-card p-6 shadow-card transition hover:-translate-y-0.5 hover:shadow-elegant">
                   <div className="flex items-center gap-3">
-                    <div className={`inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground`}>
+                    <div className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                       <Icon className={`h-3.5 w-3.5 ${meta.accent}`} />
                       {meta.label}
                     </div>
                     <span className="text-xs text-muted-foreground">{u.date}</span>
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold leading-snug text-navy group-hover:text-navy/80">
-                    {u.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">
-                    {u.summary}
-                  </p>
+                  <h3 className="mt-4 font-display text-lg font-semibold leading-snug text-navy">{u.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">{u.summary}</p>
                   {u.location && (
                     <div className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <MapPin className="h-3.5 w-3.5" />
-                      {u.location}
+                      <MapPin className="h-3.5 w-3.5" /> {u.location}
                     </div>
                   )}
                 </div>
-                {u.actionLabel && u.actionHref && (
-                  <div className={`mt-5 flex items-center gap-1.5 text-sm font-semibold text-navy transition group-hover:gap-2 ${isFeatured ? "lg:mt-0 lg:self-end" : ""}`}>
-                    {u.actionHref.startsWith("/") ? (
-                      <Link to={u.actionHref} className="inline-flex items-center gap-1.5">
-                        {u.actionLabel} <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    ) : (
-                      <a href={u.actionHref} className="inline-flex items-center gap-1.5">
-                        {u.actionLabel} <ArrowRight className="h-4 w-4" />
-                      </a>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
-        <div className="mt-10 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-          <CalendarDays className="h-4 w-4" />
-          <span>Last updated: May 20, 2026</span>
+          <div className="mt-10 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <CalendarDays className="h-4 w-4" />
+            <span>Last updated: May 20, 2026</span>
+          </div>
         </div>
       </section>
 
@@ -226,12 +246,12 @@ function HomePage() {
                 Ready to source from Korea's leading producers?
               </h2>
               <p className="mt-4 max-w-2xl text-white/75">
-                Submit a buyer inquiry and our New York team will match you with verified suppliers
+                Submit an inquiry and our New York team will match you with verified suppliers
                 that fit your category, volume, and certification requirements — usually within 48 hours.
               </p>
             </div>
-            <Link to="/inquiry" className="inline-flex items-center gap-2 self-start rounded-md bg-white px-7 py-3.5 text-sm font-semibold text-navy transition hover:bg-white/90 lg:self-end">
-              Start a Buyer Inquiry <ArrowRight className="h-4 w-4" />
+            <Link to="/contact" className="inline-flex items-center gap-2 self-start rounded-md bg-white px-7 py-3.5 text-sm font-semibold text-navy transition hover:bg-white/90 lg:self-end">
+              Contact aT New York <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

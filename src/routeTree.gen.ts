@@ -10,14 +10,27 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as ProductsRouteImport } from './routes/products'
-import { Route as InquiryRouteImport } from './routes/inquiry'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
+import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
+import { Route as AboutWhoWeAreRouteImport } from './routes/about.who-we-are'
+import { Route as AboutOurRoleRouteImport } from './routes/about.our-role'
+import { Route as AboutMissionVisionRouteImport } from './routes/about.mission-vision'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramsRoute = ProgramsRouteImport.update({
+  id: '/programs',
+  path: '/programs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsRoute = ProductsRouteImport.update({
@@ -25,9 +38,14 @@ const ProductsRoute = ProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InquiryRoute = InquiryRouteImport.update({
-  id: '/inquiry',
-  path: '/inquiry',
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -40,42 +58,134 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProgramsRoute,
+} as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AboutRoute,
+} as any)
+const ProgramsSlugRoute = ProgramsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProgramsRoute,
+} as any)
+const AboutWhoWeAreRoute = AboutWhoWeAreRouteImport.update({
+  id: '/who-we-are',
+  path: '/who-we-are',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutOurRoleRoute = AboutOurRoleRouteImport.update({
+  id: '/our-role',
+  path: '/our-role',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutMissionVisionRoute = AboutMissionVisionRouteImport.update({
+  id: '/mission-vision',
+  path: '/mission-vision',
+  getParentRoute: () => AboutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/inquiry': typeof InquiryRoute
+  '/about': typeof AboutRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/notifications': typeof NotificationsRoute
   '/products': typeof ProductsRoute
+  '/programs': typeof ProgramsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/about/mission-vision': typeof AboutMissionVisionRoute
+  '/about/our-role': typeof AboutOurRoleRoute
+  '/about/who-we-are': typeof AboutWhoWeAreRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
+  '/about/': typeof AboutIndexRoute
+  '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/inquiry': typeof InquiryRoute
+  '/contact': typeof ContactRoute
+  '/notifications': typeof NotificationsRoute
   '/products': typeof ProductsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/about/mission-vision': typeof AboutMissionVisionRoute
+  '/about/our-role': typeof AboutOurRoleRoute
+  '/about/who-we-are': typeof AboutWhoWeAreRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
+  '/about': typeof AboutIndexRoute
+  '/programs': typeof ProgramsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/inquiry': typeof InquiryRoute
+  '/about': typeof AboutRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/notifications': typeof NotificationsRoute
   '/products': typeof ProductsRoute
+  '/programs': typeof ProgramsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/about/mission-vision': typeof AboutMissionVisionRoute
+  '/about/our-role': typeof AboutOurRoleRoute
+  '/about/who-we-are': typeof AboutWhoWeAreRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
+  '/about/': typeof AboutIndexRoute
+  '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/inquiry' | '/products' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/notifications'
+    | '/products'
+    | '/programs'
+    | '/sitemap.xml'
+    | '/about/mission-vision'
+    | '/about/our-role'
+    | '/about/who-we-are'
+    | '/programs/$slug'
+    | '/about/'
+    | '/programs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/inquiry' | '/products' | '/sitemap.xml'
-  id: '__root__' | '/' | '/about' | '/inquiry' | '/products' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/contact'
+    | '/notifications'
+    | '/products'
+    | '/sitemap.xml'
+    | '/about/mission-vision'
+    | '/about/our-role'
+    | '/about/who-we-are'
+    | '/programs/$slug'
+    | '/about'
+    | '/programs'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/notifications'
+    | '/products'
+    | '/programs'
+    | '/sitemap.xml'
+    | '/about/mission-vision'
+    | '/about/our-role'
+    | '/about/who-we-are'
+    | '/programs/$slug'
+    | '/about/'
+    | '/programs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  InquiryRoute: typeof InquiryRoute
+  AboutRoute: typeof AboutRouteWithChildren
+  ContactRoute: typeof ContactRoute
+  NotificationsRoute: typeof NotificationsRoute
   ProductsRoute: typeof ProductsRoute
+  ProgramsRoute: typeof ProgramsRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -88,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/programs': {
+      id: '/programs'
+      path: '/programs'
+      fullPath: '/programs'
+      preLoaderRoute: typeof ProgramsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products': {
       id: '/products'
       path: '/products'
@@ -95,11 +212,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/inquiry': {
-      id: '/inquiry'
-      path: '/inquiry'
-      fullPath: '/inquiry'
-      preLoaderRoute: typeof InquiryRouteImport
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -116,26 +240,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/programs/': {
+      id: '/programs/'
+      path: '/'
+      fullPath: '/programs/'
+      preLoaderRoute: typeof ProgramsIndexRouteImport
+      parentRoute: typeof ProgramsRoute
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/programs/$slug': {
+      id: '/programs/$slug'
+      path: '/$slug'
+      fullPath: '/programs/$slug'
+      preLoaderRoute: typeof ProgramsSlugRouteImport
+      parentRoute: typeof ProgramsRoute
+    }
+    '/about/who-we-are': {
+      id: '/about/who-we-are'
+      path: '/who-we-are'
+      fullPath: '/about/who-we-are'
+      preLoaderRoute: typeof AboutWhoWeAreRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/our-role': {
+      id: '/about/our-role'
+      path: '/our-role'
+      fullPath: '/about/our-role'
+      preLoaderRoute: typeof AboutOurRoleRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/mission-vision': {
+      id: '/about/mission-vision'
+      path: '/mission-vision'
+      fullPath: '/about/mission-vision'
+      preLoaderRoute: typeof AboutMissionVisionRouteImport
+      parentRoute: typeof AboutRoute
+    }
   }
 }
 
+interface AboutRouteChildren {
+  AboutMissionVisionRoute: typeof AboutMissionVisionRoute
+  AboutOurRoleRoute: typeof AboutOurRoleRoute
+  AboutWhoWeAreRoute: typeof AboutWhoWeAreRoute
+  AboutIndexRoute: typeof AboutIndexRoute
+}
+
+const AboutRouteChildren: AboutRouteChildren = {
+  AboutMissionVisionRoute: AboutMissionVisionRoute,
+  AboutOurRoleRoute: AboutOurRoleRoute,
+  AboutWhoWeAreRoute: AboutWhoWeAreRoute,
+  AboutIndexRoute: AboutIndexRoute,
+}
+
+const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
+
+interface ProgramsRouteChildren {
+  ProgramsSlugRoute: typeof ProgramsSlugRoute
+  ProgramsIndexRoute: typeof ProgramsIndexRoute
+}
+
+const ProgramsRouteChildren: ProgramsRouteChildren = {
+  ProgramsSlugRoute: ProgramsSlugRoute,
+  ProgramsIndexRoute: ProgramsIndexRoute,
+}
+
+const ProgramsRouteWithChildren = ProgramsRoute._addFileChildren(
+  ProgramsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  InquiryRoute: InquiryRoute,
+  AboutRoute: AboutRouteWithChildren,
+  ContactRoute: ContactRoute,
+  NotificationsRoute: NotificationsRoute,
   ProductsRoute: ProductsRoute,
+  ProgramsRoute: ProgramsRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

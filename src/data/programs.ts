@@ -54,10 +54,10 @@ export const programs: Program[] = [
     summary:
       "Drive trial and velocity with professional in-store demonstrations, chef-led tastings, and influencer-supported activations at major U.S. retailers and food-service shows.",
     highlights: [
-      "Retail in-store sampling at participating Korean and Asian grocery channels",
+      "Retail in-store sampling (H Mart, Costco, Whole Foods, Weee!)",
       "Trade-show live cooking stations",
       "Chef partnerships and recipe development",
-      "Activity reporting after each program",
+      "Performance reporting and sell-through analytics",
     ],
     audience: "Brands launching or expanding U.S. retail presence.",
   },

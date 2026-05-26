@@ -20,6 +20,28 @@ The app runs on TanStack Start (React 19 + Vite 7) with Tailwind CSS v4.
 
 ---
 
+## Notice CMS
+
+Notices can be managed through Sanity CMS. The site reads notices from Sanity
+when the environment variables below are configured. If they are empty, the site
+falls back to the local sample data in `src/data/updates.ts`.
+
+```bash
+VITE_SANITY_PROJECT_ID=your_project_id
+VITE_SANITY_DATASET=production
+VITE_SANITY_API_VERSION=2026-05-26
+```
+
+The editable Studio app lives in `studio/`. Its notice schema is in
+`studio/schemas/notice.ts`. The fields are: title, summary, date, category,
+location, button label, and button link.
+
+For handoff: editors should add or update notice documents inside Sanity Studio.
+Developers only need to keep the Sanity project ID and dataset in the hosting
+environment.
+
+---
+
 ## Project structure
 
 ```

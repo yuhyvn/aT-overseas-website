@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Globe2, Mail, MapPin, Phone } from "lucide-react";
+import { Globe2, Mail, MapPin, Phone, Printer } from "lucide-react";
 import { branch } from "@/data/branch";
 
 const footerLinks = [
@@ -56,6 +56,9 @@ export function SiteFooter() {
             </li>
             <li className="flex gap-2.5">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.phone}
+            </li>
+            <li className="flex gap-2.5">
+              <Printer className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.fax}
             </li>
             <li className="flex gap-2.5">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.email}

@@ -32,6 +32,8 @@ export interface BranchInfo {
   address: string;
   /** Public phone number in international format */
   phone: string;
+  /** Public fax number */
+  fax: string;
   /** Public contact email */
   email: string;
   /** Year the branch was established (used in copy) */
@@ -46,9 +48,10 @@ export const branch: BranchInfo = {
   displayName: "aT New York",
   tagline: "K-Food Trade Platform",
   market: "U.S.",
-  address: "460 Park Avenue, Suite 2401, New York, NY 10022",
-  phone: "+1 (212) 826-0019",
-  email: "ny@at.or.kr",
+  address: "15 East 40th St., #701, New York, NY 10016, USA",
+  phone: "(212) 889-2561",
+  fax: "(212) 889-2080",
+  email: "info@atcenterny.com",
   establishedYear: 1989,
   officeHours: {
     weekday: "9:00 – 18:00 ET",

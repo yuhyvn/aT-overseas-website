@@ -2,15 +2,23 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, MapPin, CalendarDays } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
-import { updates, updateCategoryMeta, type UpdateCategory } from "@/data/updates";
+import { updateCategoryMeta, type UpdateCategory } from "@/data/updates";
+import { useNotices } from "@/hooks/use-notices";
 
 export const Route = createFileRoute("/notifications")({
   head: () => ({
     meta: [
       { title: "Notifications — aT New York K-Food Platform" },
-      { name: "description", content: "Latest announcements from aT New York: export support, trade exhibitions, buyer matching events, K-food industry updates, and import regulation changes." },
+      {
+        name: "description",
+        content:
+          "Latest announcements from aT New York: export support, trade exhibitions, buyer matching events, K-food industry updates, and import regulation changes.",
+      },
       { property: "og:title", content: "Notifications — aT New York" },
-      { property: "og:description", content: "Trade announcements, events, and regulatory updates for U.S.–Korea food trade." },
+      {
+        property: "og:description",
+        content: "Trade announcements, events, and regulatory updates for U.S.–Korea food trade.",
+      },
     ],
   }),
   component: NotificationsPage,
@@ -27,19 +35,23 @@ const filters: { value: "all" | UpdateCategory; label: string }[] = [
 
 function NotificationsPage() {
   const [active, setActive] = useState<"all" | UpdateCategory>("all");
-  const filtered = active === "all" ? updates : updates.filter((u) => u.category === active);
+  const { notices, source } = useNotices();
+  const filtered = active === "all" ? notices : notices.filter((u) => u.category === active);
 
   return (
     <SiteLayout>
       <section className="border-b border-border bg-secondary/40">
         <div className="container-page py-20">
-          <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Notifications</div>
+          <div className="eyebrow">
+            <span className="h-px w-8 bg-brand-green" /> Notifications
+          </div>
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-navy sm:text-5xl">
             Announcements, events, and updates from the K-Food trade desk.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
             A live channel of export-support announcements, trade exhibitions, buyer-matching
-            programs, industry insights, and U.S. import-regulation changes — curated by aT New York.
+            programs, industry insights, and U.S. import-regulation changes — curated by aT New
+            York.
           </p>
         </div>
       </section>
@@ -78,8 +90,12 @@ function NotificationsPage() {
                   </div>
                   <span className="text-xs text-muted-foreground">{u.date}</span>
                 </div>
-                <h2 className="mt-4 font-display text-lg font-semibold leading-snug text-navy">{u.title}</h2>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-4">{u.summary}</p>
+                <h2 className="mt-4 font-display text-lg font-semibold leading-snug text-navy">
+                  {u.title}
+                </h2>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-4">
+                  {u.summary}
+                </p>
                 {u.location && (
                   <div className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
                     <MapPin className="h-3.5 w-3.5" /> {u.location}
@@ -88,11 +104,17 @@ function NotificationsPage() {
                 {u.actionLabel && u.actionHref && (
                   <div className="mt-5 border-t border-border pt-4">
                     {u.actionHref.startsWith("/") ? (
-                      <Link to={u.actionHref} className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy transition group-hover:gap-2">
+                      <Link
+                        to={u.actionHref}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy transition group-hover:gap-2"
+                      >
                         {u.actionLabel} <ArrowRight className="h-4 w-4" />
                       </Link>
                     ) : (
-                      <a href={u.actionHref} className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy transition group-hover:gap-2">
+                      <a
+                        href={u.actionHref}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy transition group-hover:gap-2"
+                      >
                         {u.actionLabel} <ArrowRight className="h-4 w-4" />
                       </a>
                     )}
@@ -105,7 +127,7 @@ function NotificationsPage() {
 
         <div className="mt-12 flex items-center justify-center gap-2 text-sm text-muted-foreground">
           <CalendarDays className="h-4 w-4" />
-          <span>Last updated: May 20, 2026</span>
+          <span>{source === "cms" ? "Managed in CMS" : "Using local notice data"}</span>
         </div>
       </section>
     </SiteLayout>

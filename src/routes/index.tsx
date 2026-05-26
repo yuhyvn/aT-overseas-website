@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Bell, Building2, Mail, MapPin, Phone, BookOpen } from "lucide-react";
+import { ArrowRight, Bell, Building2, BookOpen, Mail, MapPin, Phone, Printer } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import heroImg from "@/assets/hero-kfood.jpg";
 import { branch } from "@/data/branch";
-import { updates } from "@/data/updates";
+import { useNotices } from "@/hooks/use-notices";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,7 +28,7 @@ const quickLinks = [
     to: "/about",
     icon: Building2,
     label: "About Office",
-    desc: `Learn about the ${branch.branchName} office and aT AMERICA.`,
+    desc: `Learn about this individual ${branch.branchName} branch site.`,
   },
   {
     to: "/notifications",
@@ -45,7 +45,8 @@ const quickLinks = [
 ] as const;
 
 function HomePage() {
-  const recent = updates.slice(0, 3);
+  const { notices } = useNotices();
+  const recent = notices.slice(0, 3);
 
   return (
     <SiteLayout>
@@ -130,10 +131,10 @@ function HomePage() {
               {branch.organization} ({branch.organizationShort})
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              aT AMERICA is the U.S. regional headquarters of Korea Agro-Fisheries & Food Trade
-              Corporation in Republic of Korea, with branch offices in New York, Los Angeles, and
-              Sao Paulo, Brazil. aT promotes Korean foods and beverages through trade, export
-              support, marketing, exhibitions, packaging support, and buyer connections.
+              This website is for the {branch.branchName} branch. It uses content and program
+              information from the existing aT Center America regional website as a reference, while
+              organizing the experience as an individual overseas branch site. Los Angeles, Houston,
+              Sao Paulo, and other offices can follow the same structure as separate branch sites.
             </p>
             <Link
               to="/about"
@@ -148,6 +149,9 @@ function HomePage() {
             </li>
             <li className="flex gap-3">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.phone}
+            </li>
+            <li className="flex gap-3">
+              <Printer className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.fax}
             </li>
             <li className="flex gap-3">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.email}
@@ -241,6 +245,7 @@ function HomePage() {
             <dl className="grid gap-3 text-sm">
               <Row k="Address" v={branch.address} />
               <Row k="Phone" v={branch.phone} />
+              <Row k="Fax" v={branch.fax} />
               <Row k="Email" v={branch.email} />
               <Row k="Hours" v={`${branch.officeHours.weekday} (Mon-Fri)`} />
             </dl>

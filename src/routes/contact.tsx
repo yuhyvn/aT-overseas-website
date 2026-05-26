@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Mail, MapPin, Phone, Printer } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { branch } from "@/data/branch";
 
@@ -9,15 +9,31 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: `Contact — ${branch.displayName} K-Food Platform` },
-      { name: "description", content: `Contact ${branch.displayName} to source verified Korean food suppliers, join trade programs, or get ${branch.market} market guidance. Response ${branch.officeHours.responseTime.toLowerCase()}.` },
+      {
+        name: "description",
+        content: `Contact ${branch.displayName} to source verified Korean food suppliers, join trade programs, or get ${branch.market} market guidance. Response ${branch.officeHours.responseTime.toLowerCase()}.`,
+      },
       { property: "og:title", content: `Contact — ${branch.displayName}` },
-      { property: "og:description", content: `Get in touch with Korea's official agri-food trade office in ${branch.market}.` },
+      {
+        property: "og:description",
+        content: `Get in touch with Korea's official agri-food trade office in ${branch.market}.`,
+      },
     ],
   }),
   component: ContactPage,
 });
 
-const categories = ["Ramen","Kimchi","Snacks","Frozen Foods","Beverages","Sauces & Seasonings","Health Foods","Programs / General","Other"];
+const categories = [
+  "Ramen",
+  "Kimchi",
+  "Snacks",
+  "Frozen Foods",
+  "Beverages",
+  "Sauces & Seasonings",
+  "Health Foods",
+  "Programs / General",
+  "Other",
+];
 
 const schema = z.object({
   company: z.string().trim().min(2, "Company name is required").max(120),
@@ -50,13 +66,16 @@ function ContactPage() {
     <SiteLayout>
       <section className="border-b border-border bg-secondary/40">
         <div className="container-page py-20">
-          <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Contact</div>
+          <div className="eyebrow">
+            <span className="h-px w-8 bg-brand-green" /> Contact
+          </div>
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-navy sm:text-5xl">
             Get in touch with {branch.displayName}.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Whether you're sourcing Korean food products, joining a trade program, or seeking {branch.market} market
-            guidance — our team responds {branch.officeHours.responseTime.toLowerCase()}.
+            Whether you're sourcing Korean food products, joining a trade program, or seeking{" "}
+            {branch.market} market guidance — our team responds{" "}
+            {branch.officeHours.responseTime.toLowerCase()}.
           </p>
         </div>
       </section>
@@ -70,8 +89,8 @@ function ContactPage() {
               </div>
               <h2 className="mt-5 font-display text-2xl font-bold text-navy">Message received</h2>
               <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                Thank you. The aT New York team will review your request and follow up at your
-                email within 48 business hours.
+                Thank you. The aT New York team will review your request and follow up at your email
+                within 48 business hours.
               </p>
             </div>
           ) : (
@@ -90,10 +109,16 @@ function ContactPage() {
                   defaultValue=""
                   className="mt-1.5 w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/15"
                 >
-                  <option value="" disabled>Select a topic…</option>
-                  {categories.map((c) => <option key={c}>{c}</option>)}
+                  <option value="" disabled>
+                    Select a topic…
+                  </option>
+                  {categories.map((c) => (
+                    <option key={c}>{c}</option>
+                  ))}
                 </select>
-                {errors.category && <p className="mt-1 text-xs text-destructive">{errors.category}</p>}
+                {errors.category && (
+                  <p className="mt-1 text-xs text-destructive">{errors.category}</p>
+                )}
               </div>
 
               <div>
@@ -105,7 +130,9 @@ function ContactPage() {
                   placeholder="Target volume, packaging, certifications, timeline…"
                   className="mt-1.5 w-full resize-none rounded-md border border-input bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/15"
                 />
-                {errors.details && <p className="mt-1 text-xs text-destructive">{errors.details}</p>}
+                {errors.details && (
+                  <p className="mt-1 text-xs text-destructive">{errors.details}</p>
+                )}
               </div>
 
               <button
@@ -123,15 +150,26 @@ function ContactPage() {
 
         <aside className="space-y-6">
           <div className="rounded-2xl bg-gradient-hero p-8 text-navy-foreground shadow-elegant">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">{branch.branchName} Office</div>
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
+              {branch.branchName} Office
+            </div>
             <h2 className="mt-2 font-display text-2xl font-bold">{branch.displayName} Branch</h2>
             <p className="mt-3 text-sm text-white/75">
               {branch.organization} — official trade promotion office for {branch.market}.
             </p>
             <ul className="mt-7 space-y-4 text-sm">
-              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.address}</li>
-              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.phone}</li>
-              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.email}</li>
+              <li className="flex gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.address}
+              </li>
+              <li className="flex gap-3">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.phone}
+              </li>
+              <li className="flex gap-3">
+                <Printer className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.fax}
+              </li>
+              <li className="flex gap-3">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.email}
+              </li>
             </ul>
           </div>
 
@@ -150,10 +188,24 @@ function ContactPage() {
 }
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <label className="text-xs font-semibold uppercase tracking-[0.14em] text-foreground/70">{children}</label>;
+  return (
+    <label className="text-xs font-semibold uppercase tracking-[0.14em] text-foreground/70">
+      {children}
+    </label>
+  );
 }
 
-function Field({ label, name, type = "text", error }: { label: string; name: string; type?: string; error?: string }) {
+function Field({
+  label,
+  name,
+  type = "text",
+  error,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  error?: string;
+}) {
   return (
     <div>
       <Label>{label}</Label>

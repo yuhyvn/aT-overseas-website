@@ -5,35 +5,35 @@ export const Route = createFileRoute("/about/who-we-are")({
   head: () => ({
     meta: [
       { title: "Who We Are — aT New York" },
-      { name: "description", content: "aT AMERICA is the U.S. regional headquarters of Korea Agro-Fisheries & Food Trade Corporation, with branch offices in New York, Los Angeles, and Sao Paulo." },
+      { name: "description", content: "Korea Agro-Fisheries & Food Trade Corporation (aT) New York branch — overview of the organization and its North American operations." },
       { property: "og:title", content: "Who We Are — aT New York" },
-      { property: "og:description", content: "U.S. regional headquarters for Korean food and beverage trade promotion." },
+      { property: "og:description", content: "Korea's national agricultural trade promotion agency, operating in New York since 1989." },
     ],
   }),
   component: () => (
     <AboutSubpage
       eyebrow="Who We Are"
-      title="aT AMERICA connects Korean food and beverage producers with global markets."
-      lead="aT AMERICA is the U.S. regional headquarters of Korea Agro-Fisheries & Food Trade Corporation in Republic of Korea, with branch offices in New York, Los Angeles, and Sao Paulo, Brazil."
+      title="A national trade agency built to grow Korean food globally."
+      lead="Korea Agro-Fisheries & Food Trade Corporation (aT) is the Korean government's official agency for agricultural and food trade. The New York branch is one of more than 15 overseas offices working to scale Korean food exports."
       sections={[
         {
-          heading: "Government agency for Korean food trade",
-          body: "Korea Agro-Fisheries & Food Trade Corp. is the government agency founded in 1967 and entrusted with the promotion of trade, exportation, and marketing of Korean foods and beverages around the world.",
+          heading: "Established 1989 in New York",
+          body: "Our office has served as Korea's primary food-trade gateway to North America for more than three decades, working with importers, distributors, and retailers across all 50 states.",
         },
         {
-          heading: "Promoting Korean food globally",
-          body: "Through participation in major exhibitions, improving packaging design, advertising, and other initiatives, Korea Agro-Fisheries & Food Trade Corp. increases familiarity of Korean foods and products and caters to the global consumer market.",
+          heading: "Part of a global network",
+          body: "aT operates branches across the Americas, Europe, Asia, and the Middle East. Each office shares a common trade infrastructure while focusing on local market dynamics.",
         },
         {
-          heading: "Building trade relationships",
-          body: "aT builds and fosters relationships between manufacturers and exporters with importers and distributors, helping Korean food and beverage products reach overseas markets.",
+          heading: "Trade infrastructure, not commerce",
+          body: "We are a public-interest organization. We do not sell or distribute products — we connect, support, and promote Korean exporters and their qualified overseas trade partners.",
         },
       ]}
       stats={[
-        { v: "1967", l: "Agency founded" },
-        { v: "3", l: "aT AMERICA branch offices" },
-        { v: "NY", l: "New York office" },
-        { v: "LA", l: "Los Angeles office" },
+        { v: "1989", l: "NY branch established" },
+        { v: "15+", l: "Overseas branches" },
+        { v: "850+", l: "Suppliers represented" },
+        { v: "$1.6B", l: "K-food exports to U.S." },
       ]}
     />
   ),

@@ -3,14 +3,15 @@ import { useState } from "react";
 import { z } from "zod";
 import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
+import { branch } from "@/data/branch";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — aT New York K-Food Platform" },
-      { name: "description", content: "Contact aT New York to source verified Korean food suppliers, join trade programs, or get U.S. market guidance. Response within 48 hours." },
-      { property: "og:title", content: "Contact — aT New York" },
-      { property: "og:description", content: "Get in touch with Korea's official agri-food trade office in the United States." },
+      { title: `Contact — ${branch.displayName} K-Food Platform` },
+      { name: "description", content: `Contact ${branch.displayName} to source verified Korean food suppliers, join trade programs, or get ${branch.market} market guidance. Response ${branch.officeHours.responseTime.toLowerCase()}.` },
+      { property: "og:title", content: `Contact — ${branch.displayName}` },
+      { property: "og:description", content: `Get in touch with Korea's official agri-food trade office in ${branch.market}.` },
     ],
   }),
   component: ContactPage,
@@ -51,11 +52,11 @@ function ContactPage() {
         <div className="container-page py-20">
           <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Contact</div>
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-navy sm:text-5xl">
-            Get in touch with aT New York.
+            Get in touch with {branch.displayName}.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Whether you're sourcing Korean food products, joining a trade program, or seeking U.S. market
-            guidance — our team responds within 48 business hours.
+            Whether you're sourcing Korean food products, joining a trade program, or seeking {branch.market} market
+            guidance — our team responds {branch.officeHours.responseTime.toLowerCase()}.
           </p>
         </div>
       </section>

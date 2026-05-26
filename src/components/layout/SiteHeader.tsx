@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, Globe2, ChevronDown } from "lucide-react";
+import { branch } from "@/data/branch";
 
 type NavItem =
   | { to: string; label: string }
@@ -52,8 +53,8 @@ export function SiteHeader() {
             <Globe2 className="h-5 w-5" />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="font-display text-[15px] font-bold tracking-tight text-navy">aT New York</span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">K-Food Trade Platform</span>
+            <span className="font-display text-[15px] font-bold tracking-tight text-navy">{branch.displayName}</span>
+            <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">{branch.tagline}</span>
           </div>
         </Link>
 

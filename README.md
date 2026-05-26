@@ -1,10 +1,12 @@
-# aT Overseas Branch — K-Food Trade Platform
+# aT Overseas Branch — Official Branch Site
 
-A modern B2B digital platform that helps overseas buyers, distributors, and
-retailers discover Korean food products, programs, and supplier information.
-Currently configured for the **New York branch** of the
-Korea Agro-Fisheries & Food Trade Corporation (aT), and designed to be
-easily reused for other overseas branches.
+A simple, official overseas-branch website for the
+Korea Agro-Fisheries & Food Trade Corporation (aT). Currently configured for
+the **New York branch**, and designed to be easily reused for other overseas
+branches by editing a small number of data files.
+
+The site focuses on official branch information rather than marketing —
+similar in spirit to overseas-office pages of other Korean public agencies.
 
 ---
 
@@ -20,32 +22,44 @@ The app runs on TanStack Start (React 19 + Vite 7) with Tailwind CSS v4.
 
 ---
 
+## Site structure (pages)
+
+| Path         | Purpose                                                      |
+| ------------ | ------------------------------------------------------------ |
+| `/`          | Home — welcome, quick links, office summary, recent notices  |
+| `/about`     | About Office — single page introducing the branch            |
+| `/notices`   | Notices — announcements, events, regulatory updates          |
+| `/resources` | Resources — K-Food categories, programs, useful links        |
+| `/contact`   | Contact — office information and inquiry form                |
+
+The top navigation has only these five items, mirroring the page list above.
+
+---
+
 ## Project structure
 
 ```
 src/
 ├── routes/                     # File-based routes (TanStack Router)
 │   ├── __root.tsx              # Root layout (html shell, providers)
-│   ├── index.tsx               # Homepage
-│   ├── about.*.tsx             # About section (layout + sub-pages)
-│   ├── programs.*.tsx          # Programs section (layout + sub-pages)
-│   ├── products.tsx            # Product catalogue
-│   ├── notifications.tsx       # Latest updates / announcements
+│   ├── index.tsx               # Home
+│   ├── about.tsx               # About Office (single page)
+│   ├── notices.tsx             # Notices
+│   ├── resources.tsx           # Resources (K-Food categories + programs + links)
 │   ├── contact.tsx             # Contact + inquiry form
 │   └── sitemap[.]xml.ts        # SEO sitemap
 │
 ├── components/
 │   ├── layout/                 # SiteHeader, SiteFooter, SiteLayout
-│   ├── about/                  # About sub-page wrapper
 │   └── ui/                     # shadcn/ui primitives
 │
 ├── data/                       # ⭐ Branch-configurable content
 │   ├── branch.ts               # Branch info (name, address, phone, email…)
-│   ├── products.ts             # Product catalogue + categories
-│   ├── programs.ts             # Trade programs offered by this branch
-│   └── updates.ts              # Latest news / notifications
+│   ├── products.ts             # K-Food categories shown on /resources
+│   ├── programs.ts             # Trade programs shown on /resources
+│   └── updates.ts              # Notices shown on /notices and home
 │
-├── assets/                     # Hero & product imagery
+├── assets/                     # Hero & category imagery
 └── styles.css                  # Design tokens (colors, gradients, shadows)
 ```
 
@@ -53,42 +67,38 @@ src/
 
 ## Adapting this site for another overseas branch
 
-The platform is built so that swapping the branch (e.g. New York → Los Angeles,
-Tokyo, Paris, Hanoi) only requires editing data files — no component logic
-needs to change.
+The platform is built so swapping the branch (e.g. New York → Los Angeles,
+Tokyo, Paris, Hanoi) only requires editing data files. **Start with
+`src/data/branch.ts`** — that single file drives the header, footer, contact
+page, hero copy, and metadata across the entire site.
 
-### 1. Update branch info — `src/data/branch.ts`
+### 1. Branch info — `src/data/branch.ts`
 
-Edit the single `branch` object: organization, branch name, display name,
-tagline, market label, address, phone, email, and office hours. These values
-flow automatically into the header, footer, contact page, and metadata.
+Update the `branch` object: organization, branch name, display name, tagline,
+market label, address, phone, email, established year, and office hours.
 
-### 2. Update the product catalogue — `src/data/products.ts`
+### 2. K-Food categories — `src/data/products.ts`
 
-Add or remove `Product` entries and category metadata so the catalogue
-reflects what's relevant in that market (e.g. Halal-certified items for
-Southeast Asia, organic lines for the EU).
+Adjust the categories shown on `/resources` and the home page to reflect the
+items most relevant to that market.
 
-### 3. Update programs — `src/data/programs.ts`
+### 3. Programs — `src/data/programs.ts`
 
-Each overseas branch runs different trade programs. Update the `programs`
-array (slug, title, summary, highlights, target audience) — the program
-routes and homepage will pick the changes up automatically.
+Each branch runs different trade-support programs. Edit the list — the
+Resources page picks up changes automatically.
 
-### 4. Update announcements — `src/data/updates.ts`
+### 4. Notices — `src/data/updates.ts`
 
-Replace the sample `updates` with the branch's own announcements, trade
-exhibitions, buyer-matching events, and regulation news.
+Replace the sample notices with the branch's own announcements.
 
-### 5. (Optional) Refresh imagery — `src/assets/`
+### 5. (Optional) Imagery — `src/assets/`
 
 Replace `hero-kfood.jpg` and category images with market-appropriate visuals.
 
-### 6. (Optional) Adjust theme — `src/styles.css`
+### 6. (Optional) Theme — `src/styles.css`
 
 All colors live as design tokens (`--navy`, `--brand-green`, `--gold`, …).
-If a branch needs a slightly different accent, change the tokens here — the
-whole UI follows.
+Adjust the tokens if a branch needs a slightly different accent.
 
 ### What you should NOT need to change
 

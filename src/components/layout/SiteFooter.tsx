@@ -2,10 +2,17 @@ import { Link } from "@tanstack/react-router";
 import { Globe2, Mail, MapPin, Phone } from "lucide-react";
 import { branch } from "@/data/branch";
 
+const footerNav = [
+  { to: "/about", label: "About Office" },
+  { to: "/notices", label: "Notices" },
+  { to: "/resources", label: "Resources" },
+  { to: "/contact", label: "Contact" },
+] as const;
+
 export function SiteFooter() {
   return (
-    <footer className="mt-24 bg-navy-deep text-navy-foreground">
-      <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-5">
+    <footer className="mt-20 bg-navy-deep text-navy-foreground">
+      <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10">
@@ -17,26 +24,19 @@ export function SiteFooter() {
             </div>
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-            {branch.organization} — {branch.branchName} Branch. Connecting Korean food producers with the {branch.market} market since {branch.establishedYear}.
+            {branch.organization} ({branch.organizationShort}) — {branch.branchName} Branch.
+            Official overseas office for the {branch.market} market since {branch.establishedYear}.
           </p>
         </div>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">About</div>
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Site map</div>
           <ul className="mt-4 space-y-2.5 text-sm">
-            <li><Link to="/about/who-we-are" className="text-white/80 hover:text-white">Who We Are</Link></li>
-            <li><Link to="/about/our-role" className="text-white/80 hover:text-white">Our Role</Link></li>
-            <li><Link to="/about/mission-vision" className="text-white/80 hover:text-white">Mission &amp; Vision</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Programs</div>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            <li><Link to="/programs/bkf-b2b-meetings" className="text-white/80 hover:text-white">BKF B2B Meetings</Link></li>
-            <li><Link to="/programs/localization-support" className="text-white/80 hover:text-white">Localization Support</Link></li>
-            <li><Link to="/programs/food-demonstration-programs" className="text-white/80 hover:text-white">Food Demonstration</Link></li>
-            <li><Link to="/programs/overseas-logistics-warehousing" className="text-white/80 hover:text-white">Logistics &amp; Warehousing</Link></li>
+            {footerNav.map((n) => (
+              <li key={n.to}>
+                <Link to={n.to} className="text-white/80 hover:text-white">{n.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 

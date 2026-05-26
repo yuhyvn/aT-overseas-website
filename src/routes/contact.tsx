@@ -3,14 +3,15 @@ import { useState } from "react";
 import { z } from "zod";
 import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
+import { branch } from "@/data/branch";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — aT New York K-Food Platform" },
-      { name: "description", content: "Contact aT New York to source verified Korean food suppliers, join trade programs, or get U.S. market guidance. Response within 48 hours." },
-      { property: "og:title", content: "Contact — aT New York" },
-      { property: "og:description", content: "Get in touch with Korea's official agri-food trade office in the United States." },
+      { title: `Contact — ${branch.displayName} K-Food Platform` },
+      { name: "description", content: `Contact ${branch.displayName} to source verified Korean food suppliers, join trade programs, or get ${branch.market} market guidance. Response ${branch.officeHours.responseTime.toLowerCase()}.` },
+      { property: "og:title", content: `Contact — ${branch.displayName}` },
+      { property: "og:description", content: `Get in touch with Korea's official agri-food trade office in ${branch.market}.` },
     ],
   }),
   component: ContactPage,
@@ -51,11 +52,11 @@ function ContactPage() {
         <div className="container-page py-20">
           <div className="eyebrow"><span className="h-px w-8 bg-brand-green" /> Contact</div>
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-navy sm:text-5xl">
-            Get in touch with aT New York.
+            Get in touch with {branch.displayName}.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Whether you're sourcing Korean food products, joining a trade program, or seeking U.S. market
-            guidance — our team responds within 48 business hours.
+            Whether you're sourcing Korean food products, joining a trade program, or seeking {branch.market} market
+            guidance — our team responds {branch.officeHours.responseTime.toLowerCase()}.
           </p>
         </div>
       </section>
@@ -122,24 +123,24 @@ function ContactPage() {
 
         <aside className="space-y-6">
           <div className="rounded-2xl bg-gradient-hero p-8 text-navy-foreground shadow-elegant">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">New York Office</div>
-            <h2 className="mt-2 font-display text-2xl font-bold">aT New York Branch</h2>
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">{branch.branchName} Office</div>
+            <h2 className="mt-2 font-display text-2xl font-bold">{branch.displayName} Branch</h2>
             <p className="mt-3 text-sm text-white/75">
-              Korea Agro-Fisheries &amp; Food Trade Corporation — official trade promotion office for the United States.
+              {branch.organization} — official trade promotion office for {branch.market}.
             </p>
             <ul className="mt-7 space-y-4 text-sm">
-              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> 460 Park Avenue, Suite 2401<br />New York, NY 10022</li>
-              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> +1 (212) 826-0019</li>
-              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> ny@at.or.kr</li>
+              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.address}</li>
+              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.phone}</li>
+              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.email}</li>
             </ul>
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-7 shadow-card">
             <h3 className="font-display text-lg font-bold text-navy">Office hours</h3>
             <dl className="mt-4 grid gap-2 text-sm">
-              <Row k="Mon – Fri" v="9:00 – 18:00 ET" />
-              <Row k="Sat – Sun" v="Closed" />
-              <Row k="Response time" v="Within 48 hours" />
+              <Row k="Mon – Fri" v={branch.officeHours.weekday} />
+              <Row k="Sat – Sun" v={branch.officeHours.weekend} />
+              <Row k="Response time" v={branch.officeHours.responseTime} />
             </dl>
           </div>
         </aside>

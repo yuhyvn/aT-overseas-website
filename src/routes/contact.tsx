@@ -123,24 +123,24 @@ function ContactPage() {
 
         <aside className="space-y-6">
           <div className="rounded-2xl bg-gradient-hero p-8 text-navy-foreground shadow-elegant">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">New York Office</div>
-            <h2 className="mt-2 font-display text-2xl font-bold">aT New York Branch</h2>
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">{branch.branchName} Office</div>
+            <h2 className="mt-2 font-display text-2xl font-bold">{branch.displayName} Branch</h2>
             <p className="mt-3 text-sm text-white/75">
-              Korea Agro-Fisheries &amp; Food Trade Corporation — official trade promotion office for the United States.
+              {branch.organization} — official trade promotion office for {branch.market}.
             </p>
             <ul className="mt-7 space-y-4 text-sm">
-              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> 460 Park Avenue, Suite 2401<br />New York, NY 10022</li>
-              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> +1 (212) 826-0019</li>
-              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> ny@at.or.kr</li>
+              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.address}</li>
+              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.phone}</li>
+              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.email}</li>
             </ul>
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-7 shadow-card">
             <h3 className="font-display text-lg font-bold text-navy">Office hours</h3>
             <dl className="mt-4 grid gap-2 text-sm">
-              <Row k="Mon – Fri" v="9:00 – 18:00 ET" />
-              <Row k="Sat – Sun" v="Closed" />
-              <Row k="Response time" v="Within 48 hours" />
+              <Row k="Mon – Fri" v={branch.officeHours.weekday} />
+              <Row k="Sat – Sun" v={branch.officeHours.weekend} />
+              <Row k="Response time" v={branch.officeHours.responseTime} />
             </dl>
           </div>
         </aside>

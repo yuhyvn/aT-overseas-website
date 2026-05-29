@@ -34,6 +34,12 @@ export interface BranchInfo {
   phone: string;
   /** Public contact email */
   email: string;
+  /** Public phone number in international format */
+  phone: string;
+  /** Public fax number in international format */
+  fax: string;
+  /** Public contact email */
+  email: string;
   /** Year the branch was established (used in copy) */
   establishedYear: number;
   officeHours: BranchOfficeHours;
@@ -43,14 +49,14 @@ export const branch: BranchInfo = {
   organization: "Korea Agro-Fisheries & Food Trade Corporation",
   organizationShort: "aT",
   branchName: "New York",
-  displayName: "aT New York",
-  tagline: "K-Food Trade Platform",
+  displayName: "aT New York Center",
+  tagline: "Official Overseas Office",
   market: "U.S.",
   address: "460 Park Avenue, Suite 2401, New York, NY 10022",
   phone: "+1 (212) 826-0019",
+  fax: "+1 (212) 826-0598",
   email: "ny@at.or.kr",
   establishedYear: 1989,
-  officeHours: {
     weekday: "9:00 – 18:00 ET",
     weekend: "Closed",
     responseTime: "Within 48 business hours",

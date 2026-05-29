@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Globe2, Mail, MapPin, Phone } from "lucide-react";
+import { Globe2, Mail, MapPin, Phone, Printer } from "lucide-react";
 import { branch } from "@/data/branch";
 
 export function SiteFooter() {
   return (
     <footer className="mt-24 bg-navy-deep text-navy-foreground">
-      <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-5">
-        <div className="lg:col-span-2">
+      <div className="container-page grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-3">
+        <div>
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10">
               <Globe2 className="h-5 w-5" />
@@ -17,35 +17,29 @@ export function SiteFooter() {
             </div>
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-            {branch.organization} — {branch.branchName} Branch. Connecting Korean food producers with the {branch.market} market since {branch.establishedYear}.
+            {branch.organization} ({branch.organizationShort}) — official overseas office
+            supporting Korean agri-food exports to the {branch.market} market since {branch.establishedYear}.
           </p>
         </div>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">About</div>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            <li><Link to="/about/who-we-are" className="text-white/80 hover:text-white">Who We Are</Link></li>
-            <li><Link to="/about/our-role" className="text-white/80 hover:text-white">Our Role</Link></li>
-            <li><Link to="/about/mission-vision" className="text-white/80 hover:text-white">Mission &amp; Vision</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Programs</div>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            <li><Link to="/programs/bkf-b2b-meetings" className="text-white/80 hover:text-white">BKF B2B Meetings</Link></li>
-            <li><Link to="/programs/localization-support" className="text-white/80 hover:text-white">Localization Support</Link></li>
-            <li><Link to="/programs/food-demonstration-programs" className="text-white/80 hover:text-white">Food Demonstration</Link></li>
-            <li><Link to="/programs/overseas-logistics-warehousing" className="text-white/80 hover:text-white">Logistics &amp; Warehousing</Link></li>
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">Navigation</div>
+          <ul className="mt-4 grid grid-cols-2 gap-y-2.5 text-sm">
+            <li><Link to="/" className="text-white/80 hover:text-white">Home</Link></li>
+            <li><Link to="/about" className="text-white/80 hover:text-white">About Office</Link></li>
+            <li><Link to="/notifications" className="text-white/80 hover:text-white">Notices</Link></li>
+            <li><Link to="/programs" className="text-white/80 hover:text-white">Support Programs</Link></li>
+            <li><Link to="/contact" className="text-white/80 hover:text-white">Contact</Link></li>
           </ul>
         </div>
 
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">{branch.branchName} Office</div>
           <ul className="mt-4 space-y-3 text-sm text-white/80">
-            <li className="flex gap-2.5"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.address}</li>
+            <li className="flex gap-2.5"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> <span className="break-words">{branch.address}</span></li>
             <li className="flex gap-2.5"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.phone}</li>
-            <li className="flex gap-2.5"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.email}</li>
+            <li className="flex gap-2.5"><Printer className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.fax}</li>
+            <li className="flex gap-2.5"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> <span className="break-all">{branch.email}</span></li>
           </ul>
         </div>
       </div>

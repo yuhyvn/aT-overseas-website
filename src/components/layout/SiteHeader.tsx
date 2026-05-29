@@ -3,13 +3,13 @@ import { useState } from "react";
 import { Menu, X, Globe2 } from "lucide-react";
 import { branch } from "@/data/branch";
 
-const nav = [
+const nav: { to: string; label: string; exact?: boolean }[] = [
   { to: "/", label: "Home", exact: true },
   { to: "/about", label: "About Office" },
   { to: "/notifications", label: "Notices" },
   { to: "/programs", label: "Support Programs" },
   { to: "/contact", label: "Contact" },
-] as const;
+];
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);

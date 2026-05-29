@@ -32,10 +32,6 @@ export interface BranchInfo {
   address: string;
   /** Public phone number in international format */
   phone: string;
-  /** Public contact email */
-  email: string;
-  /** Public phone number in international format */
-  phone: string;
   /** Public fax number in international format */
   fax: string;
   /** Public contact email */

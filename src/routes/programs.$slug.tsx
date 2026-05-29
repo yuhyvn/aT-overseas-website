@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Users, Target } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
-import { programs } from "@/data/programs";
+import { programs, type ProgramProcessStep, type ProgramCoverageRow } from "@/data/programs";
 
 export const Route = createFileRoute("/programs/$slug")({
   loader: ({ params }) => {
@@ -98,7 +98,7 @@ function ProgramDetailPage() {
               <div className="mt-12">
                 <h2 className="font-display text-xl font-semibold text-navy sm:text-2xl">How the program works</h2>
                 <ol className="mt-6 space-y-4">
-                  {program.process.map((step) => (
+                  {program.process.map((step: ProgramProcessStep) => (
                     <li
                       key={step.step}
                       className="flex gap-4 rounded-xl border border-border bg-card p-5 shadow-card"
@@ -123,7 +123,7 @@ function ProgramDetailPage() {
                 <div className="mt-6 overflow-hidden rounded-xl border border-border bg-card shadow-card">
                   {/* Mobile-friendly definition list */}
                   <dl className="divide-y divide-border">
-                    {program.coverage.map((row) => (
+                    {program.coverage.map((row: ProgramCoverageRow) => (
                       <div
                         key={row.area}
                         className="grid gap-1 p-4 sm:grid-cols-[12rem_1fr] sm:gap-6 sm:p-5"

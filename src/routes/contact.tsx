@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Phone, Printer, CheckCircle2 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { branch } from "@/data/branch";
 
@@ -124,14 +124,15 @@ function ContactPage() {
         <aside className="space-y-6">
           <div className="rounded-2xl bg-gradient-hero p-8 text-navy-foreground shadow-elegant">
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">{branch.branchName} Office</div>
-            <h2 className="mt-2 font-display text-2xl font-bold">{branch.displayName} Branch</h2>
-            <p className="mt-3 text-sm text-white/75">
-              {branch.organization} — official trade promotion office for {branch.market}.
+            <h2 className="mt-2 font-display text-2xl font-bold">{branch.displayName}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-white/75">
+              {branch.organization} — official trade promotion office for the {branch.market} market.
             </p>
             <ul className="mt-7 space-y-4 text-sm">
-              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.address}</li>
+              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> <span className="break-words">{branch.address}</span></li>
               <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.phone}</li>
-              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.email}</li>
+              <li className="flex gap-3"><Printer className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> {branch.fax}</li>
+              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" /> <span className="break-all">{branch.email}</span></li>
             </ul>
           </div>
 

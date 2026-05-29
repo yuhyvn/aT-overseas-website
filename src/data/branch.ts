@@ -57,6 +57,7 @@ export const branch: BranchInfo = {
   fax: "+1 (212) 826-0598",
   email: "ny@at.or.kr",
   establishedYear: 1989,
+  officeHours: {
     weekday: "9:00 – 18:00 ET",
     weekend: "Closed",
     responseTime: "Within 48 business hours",

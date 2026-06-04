@@ -1,7 +1,10 @@
 import { updates, type NoticeAttachment, type Update, type UpdateCategory } from "@/data/updates";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const defaultSupabaseUrl = "https://zutmwxwzakauumavvhrq.supabase.co";
+const defaultAnonKey = "sb_publishable_iMoCtLSHZZ0eLsYAfYPMiw_YZAbbjB1";
+
+const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined) ?? defaultSupabaseUrl;
+const anonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) ?? defaultAnonKey;
 
 const sessionKey = "atny-supabase-session";
 const refreshMarginSeconds = 60;

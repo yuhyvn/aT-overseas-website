@@ -128,8 +128,8 @@ export async function fetchNoticesFromSupabase(): Promise<Update[]> {
 
     const rows = (await response.json()) as NoticeRow[];
     return rows.map(normalizeNoticeRow).map(toUpdate);
-  } catch (error) {
-    console.warn("Supabase notices could not be loaded. Returning an empty notice list.", error);
+  } catch {
+    console.warn("Supabase notices could not be loaded. Returning an empty notice list.");
     return [];
   }
 }
@@ -328,21 +328,54 @@ function normalizeNoticeRow(row: NoticeRow): NoticeRow {
 
 function normalizeAttachments(row: NoticeRow): NoticeAttachment[] {
   const attachments = Array.isArray(row.attachments) ? row.attachments : [];
-  const cleanAttachments = attachments.filter((attachment) => attachment.name && attachment.url);
+  const cleanAttachments = attachments
+    .map(normalizeAttachment)
+    .filter((attachment): attachment is NoticeAttachment => Boolean(attachment));
 
   if (cleanAttachments.length > 0) return cleanAttachments;
 
   if (row.attachment_name && row.attachment_url) {
-    return [
-      {
-        name: row.attachment_name,
-        url: row.attachment_url,
-        path: row.attachment_path ?? undefined,
-      },
-    ];
+    const attachment = normalizeAttachment({
+      name: row.attachment_name,
+      url: row.attachment_url,
+      path: row.attachment_path ?? undefined,
+    });
+
+    return attachment ? [attachment] : [];
   }
 
   return [];
+}
+
+function normalizeAttachment(attachment: NoticeAttachment): NoticeAttachment | null {
+  const name = attachment.name.trim();
+  const url = getAllowedAttachmentUrl(attachment.url);
+
+  if (!name || !url) return null;
+
+  return {
+    name,
+    url,
+    path: attachment.path,
+  };
+}
+
+function getAllowedAttachmentUrl(value: string) {
+  try {
+    const url = new URL(value);
+    const storageBase = new URL(
+      `/storage/v1/object/public/${noticeFilesBucket}/`,
+      requireSupabaseConfig().url,
+    );
+
+    if (url.protocol !== "https:") return null;
+    if (url.origin !== storageBase.origin) return null;
+    if (!url.pathname.startsWith(storageBase.pathname)) return null;
+
+    return url.toString();
+  } catch {
+    return null;
+  }
 }
 
 function normalizeCategory(category: string): UpdateCategory {
@@ -357,7 +390,9 @@ function normalizeCategory(category: string): UpdateCategory {
 
 function toRowInput(input: NoticeInput) {
   const content = input.content?.trim() || "";
-  const attachments = input.attachments ?? [];
+  const attachments = (input.attachments ?? [])
+    .map(normalizeAttachment)
+    .filter((attachment): attachment is NoticeAttachment => Boolean(attachment));
   const firstAttachment = attachments[0];
 
   return {
@@ -381,27 +416,6 @@ function makeSummary(value: string) {
 }
 
 async function getSupabaseError(response: Response, fallback: string) {
-  try {
-    const data = (await response.json()) as {
-      message?: string;
-      details?: string;
-      hint?: string;
-      code?: string;
-      error_description?: string;
-      error?: string;
-    };
-
-    console.warn("Supabase admin request failed.", {
-      status: response.status,
-      code: data.code,
-      message: data.message ?? data.error_description ?? data.error,
-      details: data.details,
-      hint: data.hint,
-    });
-
-    return fallback;
-  } catch {
-    console.warn("Supabase admin request failed.", { status: response.status });
-    return fallback;
-  }
+  console.warn("Supabase admin request failed.", { status: response.status });
+  return fallback;
 }

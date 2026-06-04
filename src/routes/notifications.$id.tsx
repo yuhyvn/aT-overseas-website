@@ -69,9 +69,11 @@ function NoticeDetailPage() {
           >
             <ArrowLeft className="h-4 w-4" /> Back to notices
           </Link>
-          <div className="mt-10 inline-flex items-center gap-2 rounded-full bg-card px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground shadow-card">
-            <Icon className={`h-3.5 w-3.5 ${meta.accent}`} />
-            {meta.label}
+          <div className="mt-8">
+            <div className="inline-flex items-center gap-2 rounded-full bg-card px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground shadow-card">
+              <Icon className={`h-3.5 w-3.5 ${meta.accent}`} />
+              {meta.label}
+            </div>
           </div>
           <h1 className="mt-5 max-w-4xl font-display text-2xl font-bold leading-snug text-navy sm:text-4xl">
             {notice.title}

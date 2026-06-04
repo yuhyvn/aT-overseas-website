@@ -73,7 +73,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "aT New York — K-Food Trade Platform" },
-      { name: "description", content: "Official B2B platform of the Korea Agro-Fisheries & Food Trade Corporation New York branch. Connecting Korean food to the U.S. market." },
+      {
+        name: "description",
+        content:
+          "Official website of aT Center New York, Korea Agro-Fisheries & Food Trade Corporation. Connecting Korean food to the U.S. market.",
+      },
       { name: "author", content: "aT New York" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -81,7 +85,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap",
+      },
       { rel: "stylesheet", href: appCss },
     ],
   }),

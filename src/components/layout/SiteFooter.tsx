@@ -1,34 +1,24 @@
 import { Link } from "@tanstack/react-router";
-import { Globe2, Mail, MapPin, Phone, Printer } from "lucide-react";
+import { Mail, MapPin, Phone, Printer } from "lucide-react";
+import footerLogoUrl from "@/assets/at-new-york-footer-logo.svg";
 import { branch } from "@/data/branch";
 
 const footerLinks = [
   { to: "/about", label: "About Office" },
   { to: "/notifications", label: "Notices" },
-  { to: "/products", label: "Resources" },
-  { to: "/contact", label: "Contact" },
+  { to: "/programs", label: "Support Programs" },
 ] as const;
 
 export function SiteFooter() {
   return (
     <footer className="mt-24 bg-navy-deep text-navy-foreground">
-      <div className="container-page grid gap-10 py-14 md:grid-cols-[1.2fr_0.8fr_1fr]">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10">
-              <Globe2 className="h-5 w-5" />
-            </div>
-            <div className="leading-tight">
-              <div className="font-display text-base font-bold">{branch.displayName}</div>
-              <div className="text-[10px] uppercase tracking-[0.16em] text-white/60">
-                {branch.tagline}
-              </div>
-            </div>
-          </div>
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-            {branch.organization} — {branch.branchName} Branch. Supporting Korean agri-food trade in
-            the {branch.market} market.
-          </p>
+      <div className="container-page grid items-center gap-10 py-14 md:grid-cols-[1.2fr_0.8fr_1fr]">
+        <div className="flex items-center">
+          <img
+            src={footerLogoUrl}
+            alt="aT Center New York"
+            className="h-10 w-auto max-w-[260px] sm:h-12 sm:max-w-[340px] lg:h-14 lg:max-w-[410px]"
+          />
         </div>
 
         <div>
@@ -48,7 +38,7 @@ export function SiteFooter() {
 
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
-            {branch.branchName} Office
+            {branch.branchName}
           </div>
           <ul className="mt-4 space-y-3 text-sm text-white/80">
             <li className="flex gap-2.5">

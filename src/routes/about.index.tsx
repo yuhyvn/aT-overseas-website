@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  ClipboardList,
+  BadgeCheck,
+  ChefHat,
   Crosshair,
   Eye,
+  Globe2,
   Handshake,
-  Languages,
-  PackageCheck,
-  Presentation,
-  Ship,
   Store,
-  Utensils,
+  MonitorPlay,
+  Tractor,
+  Warehouse,
 } from "lucide-react";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 
@@ -20,13 +20,13 @@ export const Route = createFileRoute("/about/")({
       {
         name: "description",
         content:
-          "Learn about the aT New York branch site, adapted from the broader aT Center America regional content.",
+          "Learn about the aT Center New York site, adapted from the broader aT Center America regional content.",
       },
       { property: "og:title", content: "About Office — aT New York" },
       {
         property: "og:description",
         content:
-          "An individual overseas branch site for aT New York, with regional aT Center America content used as reference.",
+          "An individual overseas center site for aT Center New York, with regional aT Center America content used as reference.",
       },
     ],
   }),
@@ -34,13 +34,13 @@ export const Route = createFileRoute("/about/")({
 });
 
 const services = [
-  { icon: PackageCheck, label: "Agricultural & Fishery Product" },
+  { icon: Tractor, label: "Agricultural & Fishery Product" },
   { icon: Handshake, label: "BKF (Buy Korean Food) B2B Meeting" },
-  { icon: ClipboardList, label: "Broker Service" },
-  { icon: Presentation, label: "Food Show Support" },
-  { icon: Languages, label: "Localization" },
-  { icon: Utensils, label: "Food Demonstrations" },
-  { icon: Ship, label: "Overseas Logistics & Warehouse" },
+  { icon: BadgeCheck, label: "Broker Service" },
+  { icon: Store, label: "Food Show Support" },
+  { icon: Globe2, label: "Localization" },
+  { icon: ChefHat, label: "Food Demonstrations" },
+  { icon: Warehouse, label: "Overseas Logistics & Warehouse" },
 ] as const;
 
 function AboutIndex() {
@@ -52,60 +52,40 @@ function AboutIndex() {
             <span className="h-px w-8 bg-brand-green" /> About Office
           </div>
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold text-navy sm:text-4xl">
-            aT New York is an individual branch site based on the aT Center America regional model.
+            aT Center New York is an individual center site based on the aT Center America regional
+            model.
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground">
             The existing aT Center America website represents the broader regional network,
             including New York, Los Angeles, and Sao Paulo. This project separates that regional
-            content into individual overseas branch sites, starting with New York.
+            content into individual overseas center sites, starting with New York.
           </p>
         </div>
       </section>
 
       <section className="container-page py-14 sm:py-16">
-        <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr]">
-          <div>
-            <h2 className="font-display text-2xl font-bold text-navy">Who We Are</h2>
-            <div className="mt-5 space-y-4 text-base leading-relaxed text-muted-foreground">
-              <p>
-                This page keeps the core institutional information from the regional aT Center
-                America content, but presents it through the lens of the New York office. The same
-                format can later be reused for Los Angeles, Houston, Sao Paulo, and other branches.
-              </p>
-              <p>
-                Korea Agro-Fisheries &amp; Food Trade Corp. is the government agency that was
-                founded in 1967 entrusted with the promotion of trade, exportation, and marketing of
-                Korean foods and beverages around the world.
-              </p>
-              <p>
-                Through participation in major exhibitions, improving packaging design, advertising,
-                and other initiatives, Korea Agro-Fisheries &amp; Food Trade Corp. increases
-                familiarity of Korean foods and products and caters to the global consumer market.
-              </p>
-              <p>
-                It also builds and fosters relationships between manufacturers, exporters with
-                importers, and distributors.
-              </p>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-border bg-card p-6 shadow-card">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-green/10 text-brand-green">
-                <Store className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="font-display text-lg font-semibold text-navy">Site Structure</h2>
-                <p className="text-sm text-muted-foreground">
-                  Regional reference, individual branch site
-                </p>
-              </div>
-            </div>
-            <dl className="mt-6 grid gap-3 text-sm">
-              <InfoRow label="Current Site" value="New York Branch" />
-              <InfoRow label="Reference" value="aT Center America regional content" />
-              <InfoRow label="Future Sites" value="Los Angeles, Houston, Sao Paulo, and others" />
-            </dl>
+        <div className="max-w-4xl">
+          <h2 className="font-display text-2xl font-bold text-navy">Who We Are</h2>
+          <div className="mt-5 space-y-3 text-base leading-relaxed text-muted-foreground">
+            <p>
+              This page keeps the core institutional information from the regional aT Center America
+              content, but presents it through the lens of the New York office. The same format can
+              later be reused for Los Angeles, Houston, Sao Paulo, and other centers.
+            </p>
+            <p>
+              Korea Agro-Fisheries &amp; Food Trade Corp. is the government agency that was founded
+              in 1967 entrusted with the promotion of trade, exportation, and marketing of Korean
+              foods and beverages around the world.
+            </p>
+            <p>
+              Through participation in major exhibitions, improving packaging design, advertising,
+              and other initiatives, Korea Agro-Fisheries &amp; Food Trade Corp. increases
+              familiarity of Korean foods and products and caters to the global consumer market.
+            </p>
+            <p>
+              It also builds and fosters relationships between manufacturers, exporters with
+              importers, and distributors.
+            </p>
           </div>
         </div>
       </section>
@@ -142,17 +122,6 @@ function AboutIndex() {
         </div>
       </section>
     </SiteLayout>
-  );
-}
-
-function InfoRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="border-b border-border/70 pb-3 last:border-0 last:pb-0">
-      <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-        {label}
-      </dt>
-      <dd className="mt-1 font-medium text-foreground">{value}</dd>
-    </div>
   );
 }
 

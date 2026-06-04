@@ -20,9 +20,9 @@ export interface BranchInfo {
   organization: string;
   /** Short acronym for the parent organization */
   organizationShort: string;
-  /** Branch / city name, e.g. "New York" */
+  /** Center / office name, e.g. "aT Center New York" */
   branchName: string;
-  /** Display name used in headers/footers, e.g. "aT New York" */
+  /** Display name used in headers/footers, e.g. "aT Center New York" */
   displayName: string;
   /** Short site tagline shown under the logo */
   tagline: string;
@@ -44,8 +44,8 @@ export interface BranchInfo {
 export const branch: BranchInfo = {
   organization: "Korea Agro-Fisheries & Food Trade Corporation",
   organizationShort: "aT",
-  branchName: "New York",
-  displayName: "aT New York",
+  branchName: "aT Center New York",
+  displayName: "aT Center New York",
   tagline: "K-Food Trade Platform",
   market: "U.S.",
   address: "15 East 40th St., #701, New York, NY 10016, USA",

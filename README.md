@@ -1,10 +1,10 @@
 # aT Overseas Branch — K-Food Trade Platform
 
 A modern B2B digital platform that helps overseas buyers, distributors, and
-retailers discover Korean food products, programs, and supplier information.
-Currently configured for the **New York branch** of the
+retailers learn about Korean food trade support programs and office updates.
+Currently configured for **aT Center New York** of the
 Korea Agro-Fisheries & Food Trade Corporation (aT), and designed to be
-easily reused for other overseas branches.
+easily reused for other overseas centers.
 
 ---
 
@@ -20,25 +20,32 @@ The app runs on TanStack Start (React 19 + Vite 7) with Tailwind CSS v4.
 
 ---
 
-## Notice CMS
+## Notice Admin
 
-Notices can be managed through Sanity CMS. The site reads notices from Sanity
-when the environment variables below are configured. If they are empty, the site
-falls back to the local sample data in `src/data/updates.ts`.
+Notices are managed through Supabase. Visitors read notices from the public
+`notices` table, while authenticated administrators can create, update, and
+delete notices at `/admin/notices`.
+
+Required environment variables:
 
 ```bash
-VITE_SANITY_PROJECT_ID=your_project_id
-VITE_SANITY_DATASET=production
-VITE_SANITY_API_VERSION=2026-05-26
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-public-key
 ```
 
-The editable Studio app lives in `studio/`. Its notice schema is in
-`studio/schemas/notice.ts`. The fields are: title, summary, date, category,
-location, button label, and button link.
+Run the SQL in `supabase-notices.sql` inside Supabase SQL Editor to create the
+table and access policies. If Supabase is not configured yet, the site falls
+back to local sample data in `src/data/updates.ts`.
 
-For handoff: editors should add or update notice documents inside Sanity Studio.
-Developers only need to keep the Sanity project ID and dataset in the hosting
-environment.
+Admin workflow:
+
+1. Go to `/admin/login`.
+2. Sign in with a Supabase Auth user.
+3. Go to `/admin/notices`.
+4. Create, edit, delete, or view published notices.
+
+For action buttons, leave action label/link empty unless the notice needs a
+button. Valid action links should start with `mailto:`, `https://`, or `http://`.
 
 ---
 
@@ -50,10 +57,10 @@ src/
 │   ├── __root.tsx              # Root layout (html shell, providers)
 │   ├── index.tsx               # Homepage
 │   ├── about.*.tsx             # About section (layout + sub-pages)
-│   ├── programs.*.tsx          # Programs section (layout + sub-pages)
-│   ├── products.tsx            # Product catalogue
-│   ├── notifications.tsx       # Latest updates / announcements
-│   ├── contact.tsx             # Contact + inquiry form
+│   ├── programs.*.tsx          # Support Programs section (layout + sub-pages)
+│   ├── products.tsx            # Legacy hidden product route
+│   ├── notifications*.tsx      # Public notice list + detail pages
+│   ├── admin*.tsx              # Supabase login + notice management
 │   └── sitemap[.]xml.ts        # SEO sitemap
 │
 ├── components/
@@ -62,9 +69,9 @@ src/
 │   └── ui/                     # shadcn/ui primitives
 │
 ├── data/                       # ⭐ Branch-configurable content
-│   ├── branch.ts               # Branch info (name, address, phone, email…)
-│   ├── products.ts             # Product catalogue + categories
-│   ├── programs.ts             # Trade programs offered by this branch
+│   ├── branch.ts               # Center info (name, address, phone, email…)
+│   ├── products.ts             # Legacy product data, currently not linked in navigation
+│   ├── programs.ts             # Support programs offered by this center
 │   └── updates.ts              # Latest news / notifications
 │
 ├── assets/                     # Hero & product imagery
@@ -73,43 +80,37 @@ src/
 
 ---
 
-## Adapting this site for another overseas branch
+## Adapting this site for another overseas center
 
-The platform is built so that swapping the branch (e.g. New York → Los Angeles,
+The platform is built so that swapping the center (e.g. New York → Los Angeles,
 Tokyo, Paris, Hanoi) only requires editing data files — no component logic
 needs to change.
 
-### 1. Update branch info — `src/data/branch.ts`
+### 1. Update center info — `src/data/branch.ts`
 
-Edit the single `branch` object: organization, branch name, display name,
+Edit the single `branch` object: organization, center name, display name,
 tagline, market label, address, phone, email, and office hours. These values
-flow automatically into the header, footer, contact page, and metadata.
+flow automatically into the header, footer, office summaries, and metadata.
 
-### 2. Update the product catalogue — `src/data/products.ts`
+### 2. Update support programs — `src/data/programs.ts`
 
-Add or remove `Product` entries and category metadata so the catalogue
-reflects what's relevant in that market (e.g. Halal-certified items for
-Southeast Asia, organic lines for the EU).
-
-### 3. Update programs — `src/data/programs.ts`
-
-Each overseas branch runs different trade programs. Update the `programs`
+Each overseas center may run different support programs. Update the `programs`
 array (slug, title, summary, highlights, target audience) — the program
 routes and homepage will pick the changes up automatically.
 
-### 4. Update announcements — `src/data/updates.ts`
+### 3. Update announcements
 
-Replace the sample `updates` with the branch's own announcements, trade
-exhibitions, buyer-matching events, and regulation news.
+For production, use the Supabase admin screen at `/admin/notices`. The local
+`src/data/updates.ts` file is only fallback sample data.
 
-### 5. (Optional) Refresh imagery — `src/assets/`
+### 4. (Optional) Refresh imagery — `src/assets/`
 
 Replace `hero-kfood.jpg` and category images with market-appropriate visuals.
 
-### 6. (Optional) Adjust theme — `src/styles.css`
+### 5. (Optional) Adjust theme — `src/styles.css`
 
 All colors live as design tokens (`--navy`, `--brand-green`, `--gold`, …).
-If a branch needs a slightly different accent, change the tokens here — the
+If a center needs a slightly different accent, change the tokens here — the
 whole UI follows.
 
 ### What you should NOT need to change

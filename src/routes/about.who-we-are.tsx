@@ -5,16 +5,24 @@ export const Route = createFileRoute("/about/who-we-are")({
   head: () => ({
     meta: [
       { title: "Who We Are — aT New York" },
-      { name: "description", content: "Korea Agro-Fisheries & Food Trade Corporation (aT) New York branch — overview of the organization and its North American operations." },
+      {
+        name: "description",
+        content:
+          "aT Center New York — overview of Korea Agro-Fisheries & Food Trade Corporation and its North American operations.",
+      },
       { property: "og:title", content: "Who We Are — aT New York" },
-      { property: "og:description", content: "Korea's national agricultural trade promotion agency, operating in New York since 1989." },
+      {
+        property: "og:description",
+        content:
+          "Korea's national agricultural trade promotion agency, operating in New York since 1989.",
+      },
     ],
   }),
   component: () => (
     <AboutSubpage
       eyebrow="Who We Are"
       title="A national trade agency built to grow Korean food globally."
-      lead="Korea Agro-Fisheries & Food Trade Corporation (aT) is the Korean government's official agency for agricultural and food trade. The New York branch is one of more than 15 overseas offices working to scale Korean food exports."
+      lead="Korea Agro-Fisheries & Food Trade Corporation (aT) is the Korean government's official agency for agricultural and food trade. aT Center New York is one of more than 15 overseas offices working to scale Korean food exports."
       sections={[
         {
           heading: "Established 1989 in New York",
@@ -30,7 +38,7 @@ export const Route = createFileRoute("/about/who-we-are")({
         },
       ]}
       stats={[
-        { v: "1989", l: "NY branch established" },
+        { v: "1989", l: "NY Center established" },
         { v: "15+", l: "Overseas branches" },
         { v: "850+", l: "Suppliers represented" },
         { v: "$1.6B", l: "K-food exports to U.S." },

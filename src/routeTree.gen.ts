@@ -13,12 +13,17 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as NotificationsRouteImport } from './routes/notifications'
-import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
+import { Route as NotificationsIndexRouteImport } from './routes/notifications.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
+import { Route as NotificationsIdRouteImport } from './routes/notifications.$id'
+import { Route as AdminNoticesRouteImport } from './routes/admin.notices'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AboutWhoWeAreRouteImport } from './routes/about.who-we-are'
 import { Route as AboutOurRoleRouteImport } from './routes/about.our-role'
 import { Route as AboutMissionVisionRouteImport } from './routes/about.mission-vision'
@@ -43,9 +48,9 @@ const NotificationsRoute = NotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -63,6 +68,16 @@ const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProgramsRoute,
 } as any)
+const NotificationsIndexRoute = NotificationsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => NotificationsRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -72,6 +87,21 @@ const ProgramsSlugRoute = ProgramsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => ProgramsRoute,
+} as any)
+const NotificationsIdRoute = NotificationsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => NotificationsRoute,
+} as any)
+const AdminNoticesRoute = AdminNoticesRouteImport.update({
+  id: '/notices',
+  path: '/notices',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
 } as any)
 const AboutWhoWeAreRoute = AboutWhoWeAreRouteImport.update({
   id: '/who-we-are',
@@ -92,45 +122,58 @@ const AboutMissionVisionRoute = AboutMissionVisionRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRouteWithChildren
-  '/contact': typeof ContactRoute
-  '/notifications': typeof NotificationsRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/notifications': typeof NotificationsRouteWithChildren
   '/products': typeof ProductsRoute
   '/programs': typeof ProgramsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/mission-vision': typeof AboutMissionVisionRoute
   '/about/our-role': typeof AboutOurRoleRoute
   '/about/who-we-are': typeof AboutWhoWeAreRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/notifications/$id': typeof NotificationsIdRoute
   '/programs/$slug': typeof ProgramsSlugRoute
   '/about/': typeof AboutIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/notifications/': typeof NotificationsIndexRoute
   '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/contact': typeof ContactRoute
-  '/notifications': typeof NotificationsRoute
   '/products': typeof ProductsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/mission-vision': typeof AboutMissionVisionRoute
   '/about/our-role': typeof AboutOurRoleRoute
   '/about/who-we-are': typeof AboutWhoWeAreRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/notifications/$id': typeof NotificationsIdRoute
   '/programs/$slug': typeof ProgramsSlugRoute
   '/about': typeof AboutIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/notifications': typeof NotificationsIndexRoute
   '/programs': typeof ProgramsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRouteWithChildren
-  '/contact': typeof ContactRoute
-  '/notifications': typeof NotificationsRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/notifications': typeof NotificationsRouteWithChildren
   '/products': typeof ProductsRoute
   '/programs': typeof ProgramsRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/about/mission-vision': typeof AboutMissionVisionRoute
   '/about/our-role': typeof AboutOurRoleRoute
   '/about/who-we-are': typeof AboutWhoWeAreRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/notices': typeof AdminNoticesRoute
+  '/notifications/$id': typeof NotificationsIdRoute
   '/programs/$slug': typeof ProgramsSlugRoute
   '/about/': typeof AboutIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/notifications/': typeof NotificationsIndexRoute
   '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRouteTypes {
@@ -138,7 +181,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/contact'
+    | '/admin'
     | '/notifications'
     | '/products'
     | '/programs'
@@ -146,27 +189,35 @@ export interface FileRouteTypes {
     | '/about/mission-vision'
     | '/about/our-role'
     | '/about/who-we-are'
+    | '/admin/login'
+    | '/admin/notices'
+    | '/notifications/$id'
     | '/programs/$slug'
     | '/about/'
+    | '/admin/'
+    | '/notifications/'
     | '/programs/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/contact'
-    | '/notifications'
     | '/products'
     | '/sitemap.xml'
     | '/about/mission-vision'
     | '/about/our-role'
     | '/about/who-we-are'
+    | '/admin/login'
+    | '/admin/notices'
+    | '/notifications/$id'
     | '/programs/$slug'
     | '/about'
+    | '/admin'
+    | '/notifications'
     | '/programs'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/contact'
+    | '/admin'
     | '/notifications'
     | '/products'
     | '/programs'
@@ -174,16 +225,21 @@ export interface FileRouteTypes {
     | '/about/mission-vision'
     | '/about/our-role'
     | '/about/who-we-are'
+    | '/admin/login'
+    | '/admin/notices'
+    | '/notifications/$id'
     | '/programs/$slug'
     | '/about/'
+    | '/admin/'
+    | '/notifications/'
     | '/programs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRouteWithChildren
-  ContactRoute: typeof ContactRoute
-  NotificationsRoute: typeof NotificationsRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  NotificationsRoute: typeof NotificationsRouteWithChildren
   ProductsRoute: typeof ProductsRoute
   ProgramsRoute: typeof ProgramsRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -219,11 +275,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -247,6 +303,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsIndexRouteImport
       parentRoute: typeof ProgramsRoute
     }
+    '/notifications/': {
+      id: '/notifications/'
+      path: '/'
+      fullPath: '/notifications/'
+      preLoaderRoute: typeof NotificationsIndexRouteImport
+      parentRoute: typeof NotificationsRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/about/': {
       id: '/about/'
       path: '/'
@@ -260,6 +330,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/programs/$slug'
       preLoaderRoute: typeof ProgramsSlugRouteImport
       parentRoute: typeof ProgramsRoute
+    }
+    '/notifications/$id': {
+      id: '/notifications/$id'
+      path: '/$id'
+      fullPath: '/notifications/$id'
+      preLoaderRoute: typeof NotificationsIdRouteImport
+      parentRoute: typeof NotificationsRoute
+    }
+    '/admin/notices': {
+      id: '/admin/notices'
+      path: '/notices'
+      fullPath: '/admin/notices'
+      preLoaderRoute: typeof AdminNoticesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/about/who-we-are': {
       id: '/about/who-we-are'
@@ -301,6 +392,34 @@ const AboutRouteChildren: AboutRouteChildren = {
 
 const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
 
+interface AdminRouteChildren {
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminNoticesRoute: typeof AdminNoticesRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminLoginRoute: AdminLoginRoute,
+  AdminNoticesRoute: AdminNoticesRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface NotificationsRouteChildren {
+  NotificationsIdRoute: typeof NotificationsIdRoute
+  NotificationsIndexRoute: typeof NotificationsIndexRoute
+}
+
+const NotificationsRouteChildren: NotificationsRouteChildren = {
+  NotificationsIdRoute: NotificationsIdRoute,
+  NotificationsIndexRoute: NotificationsIndexRoute,
+}
+
+const NotificationsRouteWithChildren = NotificationsRoute._addFileChildren(
+  NotificationsRouteChildren,
+)
+
 interface ProgramsRouteChildren {
   ProgramsSlugRoute: typeof ProgramsSlugRoute
   ProgramsIndexRoute: typeof ProgramsIndexRoute
@@ -318,8 +437,8 @@ const ProgramsRouteWithChildren = ProgramsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRouteWithChildren,
-  ContactRoute: ContactRoute,
-  NotificationsRoute: NotificationsRoute,
+  AdminRoute: AdminRouteWithChildren,
+  NotificationsRoute: NotificationsRouteWithChildren,
   ProductsRoute: ProductsRoute,
   ProgramsRoute: ProgramsRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

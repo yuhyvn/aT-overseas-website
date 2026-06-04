@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 import { updates, type Update } from "@/data/updates";
-import { fetchNotices, hasCmsConfig } from "@/lib/notices-cms";
+import { fetchNoticesFromSupabase, hasSupabaseConfig } from "@/lib/supabase";
 
 export function useNotices() {
-  const [notices, setNotices] = useState<Update[]>(updates);
-  const [source, setSource] = useState<"local" | "cms">(hasCmsConfig() ? "cms" : "local");
+  const [notices, setNotices] = useState<Update[]>(hasSupabaseConfig() ? [] : updates);
+  const [source, setSource] = useState<"local" | "supabase">(
+    hasSupabaseConfig() ? "supabase" : "local",
+  );
+  const [loading, setLoading] = useState(hasSupabaseConfig());
 
   useEffect(() => {
     let active = true;
 
-    fetchNotices().then((items) => {
+    fetchNoticesFromSupabase().then((items) => {
       if (!active) return;
       setNotices(items);
-      setSource(hasCmsConfig() ? "cms" : "local");
+      setSource(hasSupabaseConfig() ? "supabase" : "local");
+      setLoading(false);
     });
 
     return () => {
@@ -20,5 +24,5 @@ export function useNotices() {
     };
   }, []);
 
-  return { notices, source };
+  return { notices, source, loading };
 }

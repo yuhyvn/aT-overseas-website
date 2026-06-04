@@ -1,14 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Globe2 } from "lucide-react";
-import { branch } from "@/data/branch";
+import { Menu, X } from "lucide-react";
+import logoUrl from "@/assets/at-new-york-logo.svg";
 
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About Office" },
   { to: "/notifications", label: "Notices" },
-  { to: "/products", label: "Resources" },
-  { to: "/contact", label: "Contact" },
+  { to: "/programs", label: "Support Programs" },
 ] as const;
 
 export function SiteHeader() {
@@ -16,41 +15,35 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-md">
-      <div className="container-page flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-gradient-hero text-navy-foreground">
-            <Globe2 className="h-5 w-5" />
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="font-display text-[15px] font-bold tracking-tight text-navy">
-              {branch.displayName}
-            </span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              {branch.tagline}
-            </span>
-          </div>
+      <div className="container-page flex h-20 items-center justify-between">
+        <Link to="/" className="flex min-w-0 items-center">
+          <img
+            src={logoUrl}
+            alt="aT Center New York"
+            className="h-10 w-auto max-w-[260px] sm:h-12 sm:max-w-[340px] lg:h-14 lg:max-w-[410px]"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              activeOptions={{ exact: item.to === "/" }}
-              className="text-sm font-medium text-foreground/75 transition-colors hover:text-navy"
-              activeProps={{ className: "text-navy font-semibold" }}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden items-center gap-6 lg:flex">
+          <nav className="flex items-center gap-8">
+            {nav.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                activeOptions={{ exact: item.to === "/" }}
+                className="text-sm font-medium text-foreground/75 transition-colors hover:text-navy"
+                activeProps={{ className: "text-navy font-semibold" }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="hidden lg:flex">
           <Link
-            to="/contact"
-            className="inline-flex items-center rounded-md bg-navy px-4 py-2 text-sm font-semibold text-navy-foreground shadow-card transition hover:bg-navy-deep"
+            to="/admin/login"
+            className="rounded-md border border-border/80 px-3 py-1.5 text-xs font-semibold text-foreground/65 transition hover:border-brand-green/60 hover:text-navy"
           >
-            Contact
+            Login
           </Link>
         </div>
 
@@ -78,6 +71,13 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
+            <Link
+              to="/admin/login"
+              onClick={() => setOpen(false)}
+              className="py-3 text-sm font-semibold text-foreground/70"
+            >
+              Login
+            </Link>
           </nav>
         </div>
       )}

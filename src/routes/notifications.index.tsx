@@ -37,7 +37,7 @@ function NotificationsPage() {
   const [active, setActive] = useState<"all" | UpdateCategory>("all");
   const [query, setQuery] = useState("");
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const { notices, source, loading } = useNotices();
+  const { notices, loading } = useNotices();
   const normalizedQuery = query.trim().toLowerCase();
   const filtered = notices.filter((u) => {
     const matchesCategory = active === "all" || u.category === active;
@@ -187,11 +187,6 @@ function NotificationsPage() {
             </p>
           </div>
         )}
-
-        <div className="mt-12 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-          <CalendarDays className="h-4 w-4" />
-          <span>{source === "supabase" ? "Managed in Supabase" : "Using local notice data"}</span>
-        </div>
       </section>
     </SiteLayout>
   );

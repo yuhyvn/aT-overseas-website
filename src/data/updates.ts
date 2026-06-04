@@ -40,7 +40,7 @@ export const updateCategoryMeta: Record<
   exhibitions: {
     label: "Exhibitions",
     icon: CalendarDays,
-    accent: "text-gold",
+    accent: "text-navy",
   },
   others: {
     label: "Others",

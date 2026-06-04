@@ -391,11 +391,17 @@ async function getSupabaseError(response: Response, fallback: string) {
       error?: string;
     };
 
-    const message = data.message ?? data.error_description ?? data.error;
-    const detail = data.details ?? data.hint ?? data.code;
+    console.warn("Supabase admin request failed.", {
+      status: response.status,
+      code: data.code,
+      message: data.message ?? data.error_description ?? data.error,
+      details: data.details,
+      hint: data.hint,
+    });
 
-    return [fallback, message, detail].filter(Boolean).join(" ");
+    return fallback;
   } catch {
-    return `${fallback} (${response.status})`;
+    console.warn("Supabase admin request failed.", { status: response.status });
+    return fallback;
   }
 }

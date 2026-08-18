@@ -1,138 +1,118 @@
-# aT Overseas Branch — K-Food Trade Platform
+# aT 뉴욕지사 홈페이지
 
-A modern B2B digital platform that helps overseas buyers, distributors, and
-retailers learn about Korean food trade support programs and office updates.
-Currently configured for **aT Center New York** of the
-Korea Agro-Fisheries & Food Trade Corporation (aT), and designed to be
-easily reused for other overseas centers.
+뉴욕지사에 먼저 보여드리기 위해 만든 **시범 홈페이지**입니다.
 
----
+현재 홈페이지 주소:
 
-## Getting started
+[https://www.atcenternewyork.workers.dev](https://www.atcenternewyork.workers.dev)
 
-```bash
-bun install
-bun run dev      # start the dev server
-bun run build    # production build
+## 이 홈페이지에서 할 수 있는 것
+
+- 뉴욕지사 소개 보기
+- 주소와 연락처 확인하기
+- 수출지원사업 확인하기
+- 공지사항 보기
+- 관리자가 공지사항 등록하기
+
+## 홈페이지는 어떻게 작동하나요?
+
+홈페이지는 네 가지 서비스로 만들어져 있습니다.
+
+### GitHub
+
+홈페이지의 글, 디자인, 기능을 보관하는 곳입니다.
+
+학교 과제를 컴퓨터 파일로 저장해 두는 것과 비슷합니다.
+
+### Cloudflare
+
+GitHub에 보관된 홈페이지를 인터넷에서 볼 수 있게 해주는 곳입니다.
+
+현재 방문자들은 Cloudflare에 올라간 홈페이지를 보고 있습니다.
+
+### Supabase
+
+공지사항과 관리자 계정을 보관하는 곳입니다.
+
+관리자가 공지사항을 작성하면 Supabase에 저장되고 홈페이지에 바로 나타납니다.
+
+### Lovable
+
+처음 홈페이지 모양을 만들 때 사용한 제작 도구입니다.
+
+현재 홈페이지를 인터넷에 보여주는 역할은 Cloudflare가 담당합니다. 다만 제작할 때 사용한 일부 설정은 코드 안에 남아 있습니다.
+
+## 홈페이지를 수정하면 어떻게 되나요?
+
+홈페이지 소개글이나 디자인을 바꾸는 경우:
+
+```text
+코드 수정
+→ GitHub에 저장
+→ 내용 확인
+→ Cloudflare에 올림
+→ 홈페이지에 반영
 ```
 
-The app runs on TanStack Start (React 19 + Vite 7) with Tailwind CSS v4.
+현재 GitHub와 Cloudflare는 자동으로 연결되어 있지 않습니다.
 
----
+따라서 GitHub의 코드가 바뀌더라도 홈페이지가 바로 바뀌지는 않습니다. 확인이 끝난 코드만 Cloudflare에 직접 올립니다.
 
-## Notice Admin
+이 방식은 실수로 홈페이지가 바뀌는 것을 막아줍니다.
 
-Notices are managed through Supabase. Visitors read notices from the public
-`notices` table, while authenticated administrators can create, update, and
-delete notices at `/admin/notices`.
+## 공지사항은 어떻게 등록하나요?
 
-Required environment variables:
+공지사항은 코드를 수정하지 않아도 됩니다.
 
-```bash
-VITE_SUPABASE_URL=https://your-project-ref.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-public-key
+1. 관리자 로그인 화면에 접속합니다.
+2. 관리자 이메일과 비밀번호를 입력합니다.
+3. 공지사항을 작성합니다.
+4. 저장합니다.
+5. 홈페이지에서 제대로 보이는지 확인합니다.
+
+관리자 로그인 주소:
+
+```text
+https://www.atcenternewyork.workers.dev/admin/login
 ```
 
-Run the SQL in `supabase-notices.sql` inside Supabase SQL Editor to create the
-table and access policies. If Supabase is not configured yet, the site falls
-back to local sample data in `src/data/updates.ts`.
+## 관리자 계정은 어떻게 만드나요?
 
-Admin workflow:
+홈페이지에서는 누구나 회원가입할 수 없습니다.
 
-1. Go to `/admin/login`.
-2. Sign in with a Supabase Auth user.
-3. Go to `/admin/notices`.
-4. Create, edit, delete, or view published notices.
+새 관리자가 필요하면 Supabase에서 직접 계정을 만들어야 합니다.
 
-For action buttons, leave action label/link empty unless the notice needs a
-button. Valid action links should start with `mailto:`, `https://`, or `http://`.
+현재는 임의로 회원가입할 수 없도록 막아둔 상태입니다.
 
----
+## 수정할 때 지켜야 할 것
 
-## Project structure
+- 비밀번호를 GitHub에 올리지 않습니다.
+- 인증번호나 비밀키를 다른 사람에게 보내지 않습니다.
+- 수정 전에는 현재 사이트가 정상인지 확인합니다.
+- 수정 후에는 PC와 휴대전화에서 모두 확인합니다.
+- 확인이 끝난 뒤에만 Cloudflare에 올립니다.
+- 공지사항 등록 후에는 실제 홈페이지에서 다시 확인합니다.
 
-```
-src/
-├── routes/                     # File-based routes (TanStack Router)
-│   ├── __root.tsx              # Root layout (html shell, providers)
-│   ├── index.tsx               # Homepage
-│   ├── about.*.tsx             # About section (layout + sub-pages)
-│   ├── programs.*.tsx          # Support Programs section (layout + sub-pages)
-│   ├── products.tsx            # Legacy hidden product route
-│   ├── notifications*.tsx      # Public notice list + detail pages
-│   ├── admin*.tsx              # Supabase login + notice management
-│   └── sitemap[.]xml.ts        # SEO sitemap
-│
-├── components/
-│   ├── layout/                 # SiteHeader, SiteFooter, SiteLayout
-│   ├── about/                  # About sub-page wrapper
-│   └── ui/                     # shadcn/ui primitives
-│
-├── data/                       # ⭐ Branch-configurable content
-│   ├── branch.ts               # Center info (name, address, phone, email…)
-│   ├── products.ts             # Legacy product data, currently not linked in navigation
-│   ├── programs.ts             # Support programs offered by this center
-│   └── updates.ts              # Latest news / notifications
-│
-├── assets/                     # Hero & product imagery
-└── styles.css                  # Design tokens (colors, gradients, shadows)
-```
+## 현재 상태
 
----
+현재 사이트는 실제로 작동하지만 아직 **공식 홈페이지는 아닙니다.**
 
-## Adapting this site for another overseas center
+뉴욕지사에 먼저 보여드리고, 사용할지 결정하기 위한 시범 홈페이지입니다.
 
-The platform is built so that swapping the center (e.g. New York → Los Angeles,
-Tokyo, Paris, Hanoi) only requires editing data files — no component logic
-needs to change.
+정식으로 운영하려면 다음 사항을 결정해야 합니다.
 
-### 1. Update center info — `src/data/branch.ts`
+- 뉴욕지사에서 실제로 사용할 것인지
+- 누가 공지사항을 관리할 것인지
+- 회사 명의 계정으로 옮길 것인지
+- 정식 인터넷 주소를 연결할 것인지
+- 홈페이지의 내용과 연락처가 정확한지
 
-Edit the single `branch` object: organization, center name, display name,
-tagline, market label, address, phone, email, and office hours. These values
-flow automatically into the header, footer, office summaries, and metadata.
+## 중요한 주의사항
 
-### 2. Update support programs — `src/data/programs.ts`
+이 GitHub 저장소는 공개되어 있으므로 누구나 코드를 볼 수 있습니다.
 
-Each overseas center may run different support programs. Update the `programs`
-array (slug, title, summary, highlights, target audience) — the program
-routes and homepage will pick the changes up automatically.
+관리자 비밀번호, 인증번호, 개인 정보는 절대로 올리면 안 됩니다.
 
-### 3. Update announcements
-
-For production, use the Supabase admin screen at `/admin/notices`. The local
-`src/data/updates.ts` file is only fallback sample data.
-
-### 4. (Optional) Refresh imagery — `src/assets/`
-
-Replace `hero-kfood.jpg` and category images with market-appropriate visuals.
-
-### 5. (Optional) Adjust theme — `src/styles.css`
-
-All colors live as design tokens (`--navy`, `--brand-green`, `--gold`, …).
-If a center needs a slightly different accent, change the tokens here — the
-whole UI follows.
-
-### What you should NOT need to change
-
-- Routing structure (`src/routes/`)
-- Layout components (`SiteHeader`, `SiteFooter`, `SiteLayout`)
-- shadcn/ui primitives
-- Build configuration
-
----
-
-## Tech stack
-
-- **Framework:** TanStack Start v1 (React 19, SSR-ready)
-- **Bundler:** Vite 7
-- **Styling:** Tailwind CSS v4 + custom design tokens
-- **UI primitives:** shadcn/ui (Radix + Tailwind)
-- **Forms:** Zod validation
-- **Icons:** lucide-react
-
----
-
-## License
+## 권리
 
 © Korea Agro-Fisheries & Food Trade Corporation (aT). All rights reserved.

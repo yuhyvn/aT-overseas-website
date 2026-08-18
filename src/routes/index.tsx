@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
       { title: `${branch.displayName} — ${branch.organization}` },
       {
         name: "description",
-        content: `Official website of ${branch.displayName}, ${branch.organization}.`,
+        content: `Information about ${branch.displayName}, ${branch.organization}, and its support for Korean agri-food trade in the U.S. market.`,
       },
       { property: "og:title", content: `${branch.displayName} — ${branch.tagline}` },
       {

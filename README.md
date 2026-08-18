@@ -22,8 +22,6 @@
 
 홈페이지의 글, 디자인, 기능을 보관하는 곳입니다.
 
-학교 과제를 컴퓨터 파일로 저장해 두는 것과 비슷합니다.
-
 ### Cloudflare
 
 GitHub에 보관된 홈페이지를 인터넷에서 볼 수 있게 해주는 곳입니다.
@@ -97,8 +95,6 @@ https://www.atcenternewyork.workers.dev/admin/login
 
 현재 사이트는 실제로 작동하지만 아직 **공식 홈페이지는 아닙니다.**
 
-뉴욕지사에 먼저 보여드리고, 사용할지 결정하기 위한 시범 홈페이지입니다.
-
 정식으로 운영하려면 다음 사항을 결정해야 합니다.
 
 - 뉴욕지사에서 실제로 사용할 것인지
@@ -112,7 +108,3 @@ https://www.atcenternewyork.workers.dev/admin/login
 이 GitHub 저장소는 공개되어 있으므로 누구나 코드를 볼 수 있습니다.
 
 관리자 비밀번호, 인증번호, 개인 정보는 절대로 올리면 안 됩니다.
-
-## 권리
-
-© Korea Agro-Fisheries & Food Trade Corporation (aT). All rights reserved.

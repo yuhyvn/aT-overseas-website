@@ -76,7 +76,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Official website of aT Center New York, Korea Agro-Fisheries & Food Trade Corporation. Connecting Korean food to the U.S. market.",
+          "Information about aT Center New York, Korea Agro-Fisheries & Food Trade Corporation, and its support for Korean food trade in the U.S. market.",
       },
       { name: "author", content: "aT New York" },
       { property: "og:type", content: "website" },

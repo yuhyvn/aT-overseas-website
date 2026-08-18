@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { programs } from "@/data/programs";
-import { updates } from "@/data/updates";
 
-const BASE_URL = "";
+const BASE_URL = "https://www.atcenternewyork.workers.dev";
 
 interface SitemapEntry {
   path: string;
@@ -28,11 +27,6 @@ export const Route = createFileRoute("/sitemap.xml")({
             priority: "0.7",
           })),
           { path: "/notifications", changefreq: "weekly", priority: "0.8" },
-          ...updates.map((notice) => ({
-            path: `/notifications/${notice.id}`,
-            changefreq: "weekly" as const,
-            priority: "0.6",
-          })),
         ];
         const urls = entries.map(
           (e) =>

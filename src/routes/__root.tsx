@@ -73,11 +73,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "New York Overseas Center" },
-      {
-        name: "description",
-        content:
-          "Information about aT Center New York, Korea Agro-Fisheries & Food Trade Corporation, and its support for Korean food trade in the U.S. market.",
-      },
       { name: "author", content: "aT New York" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -86,8 +81,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Learn about aT Center New York, its support programs, and notices for Korean agri-food trade in the U.S. market." },
       { property: "og:description", content: "Learn about aT Center New York, its support programs, and notices for Korean agri-food trade in the U.S. market." },
       { name: "twitter:description", content: "Learn about aT Center New York, its support programs, and notices for Korean agri-food trade in the U.S. market." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9123cf62-47f7-47c1-9fc0-a688809757d1/id-preview-4d521835--e276c34b-c66d-4057-9e29-1055e9b463ad.lovable.app-1780538159876.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9123cf62-47f7-47c1-9fc0-a688809757d1/id-preview-4d521835--e276c34b-c66d-4057-9e29-1055e9b463ad.lovable.app-1780538159876.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

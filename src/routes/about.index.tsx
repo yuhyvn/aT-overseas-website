@@ -20,13 +20,13 @@ export const Route = createFileRoute("/about/")({
       {
         name: "description",
         content:
-          "Learn about the aT Center New York site, adapted from the broader aT Center America regional content.",
+          "Learn about aT Center New York and its work supporting Korean agri-food trade in the U.S. market.",
       },
       { property: "og:title", content: "About Office — aT New York" },
       {
         property: "og:description",
         content:
-          "An individual overseas center site for aT Center New York, with regional aT Center America content used as reference.",
+          "Learn about aT Center New York and its work supporting Korean agri-food trade in the U.S. market.",
       },
     ],
   }),
@@ -52,13 +52,11 @@ function AboutIndex() {
             <span className="h-px w-8 bg-brand-green" /> About Office
           </div>
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold text-navy sm:text-4xl">
-            aT Center New York is an individual center site based on the aT Center America regional
-            model.
+            Supporting Korean agri-food trade in the U.S. market.
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground">
-            The existing aT Center America website represents the broader regional network,
-            including New York, Los Angeles, and Sao Paulo. This project separates that regional
-            content into individual overseas center sites, starting with New York.
+            aT Center New York connects Korean exporters with U.S. buyers, importers, distributors,
+            and industry partners.
           </p>
         </div>
       </section>
@@ -68,23 +66,22 @@ function AboutIndex() {
           <h2 className="font-display text-2xl font-bold text-navy">Who We Are</h2>
           <div className="mt-5 space-y-3 text-base leading-relaxed text-muted-foreground">
             <p>
-              This page keeps the core institutional information from the regional aT Center America
-              content, but presents it through the lens of the New York office. The same format can
-              later be reused for Los Angeles, Houston, Sao Paulo, and other centers.
+              As part of Korea Agro-Fisheries &amp; Food Trade Corporation (aT), our New York office
+              supports the global growth of Korean food and beverage products across the U.S.
+              market.
             </p>
             <p>
-              Korea Agro-Fisheries &amp; Food Trade Corp. is the government agency that was founded
-              in 1967 entrusted with the promotion of trade, exportation, and marketing of Korean
-              foods and beverages around the world.
+              Korea Agro-Fisheries &amp; Food Trade Corporation (aT) is a government agency
+              established in 1967 to promote the trade, export, and marketing of Korean
+              agricultural, fisheries, food, and beverage products worldwide.
             </p>
             <p>
-              Through participation in major exhibitions, improving packaging design, advertising,
-              and other initiatives, Korea Agro-Fisheries &amp; Food Trade Corp. increases
-              familiarity of Korean foods and products and caters to the global consumer market.
+              Through major exhibitions, packaging improvement, marketing, and other export-support
+              initiatives, aT helps Korean food products build awareness and reach global consumers.
             </p>
             <p>
-              It also builds and fosters relationships between manufacturers, exporters with
-              importers, and distributors.
+              We also foster connections among Korean manufacturers and exporters and U.S.
+              importers, distributors, and buyers.
             </p>
           </div>
         </div>

@@ -110,16 +110,16 @@ function HomePage() {
                 <span className="h-px w-8 bg-brand-green" /> Office Information
               </div>
               <h2 className="mt-3 font-display text-2xl font-bold text-navy sm:text-3xl">
-                New York-specific trade support, separated from the regional site
+                Connecting Korean food exporters with the U.S. market
               </h2>
               <div className="mt-5 grid gap-3 text-base leading-7 text-muted-foreground">
                 <p>
-                  This site is organized for {branch.displayName} as an individual overseas center,
-                  while referencing the broader aT Center America regional content.
+                  {branch.displayName} supports Korean agri-food companies entering and growing in
+                  the U.S. market.
                 </p>
                 <p>
-                  It focuses on office information, official notices, and support programs for the
-                  U.S. market.
+                  We provide market information, buyer connections, localization support, food
+                  demonstrations, and logistics assistance.
                 </p>
               </div>
               <Link

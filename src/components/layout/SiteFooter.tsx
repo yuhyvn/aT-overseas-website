@@ -58,15 +58,10 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-start justify-between gap-3 py-6 text-xs text-white/55 md:flex-row md:items-center">
+        <div className="container-page py-6 text-xs text-white/55">
           <div>
             © {new Date().getFullYear()} {branch.organization} ({branch.organizationShort}). All
             rights reserved.
-          </div>
-          <div className="flex gap-5">
-            <span>Privacy</span>
-            <span>Terms</span>
-            <span>Accessibility</span>
           </div>
         </div>
       </div>

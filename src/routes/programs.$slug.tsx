@@ -8,10 +8,10 @@ export const Route = createFileRoute("/programs/$slug")({
   loader: ({ params }) => {
     const program = programs.find((p) => p.slug === params.slug);
     if (!program) throw notFound();
-    return { program };
+    return { programSlug: program.slug };
   },
   head: ({ loaderData }) => {
-    const p = loaderData?.program;
+    const p = programs.find((program) => program.slug === loaderData?.programSlug);
     if (!p) return { meta: [{ title: "Program — aT New York" }] };
     return {
       meta: [
@@ -44,7 +44,8 @@ export const Route = createFileRoute("/programs/$slug")({
 });
 
 function ProgramDetailPage() {
-  const { program } = Route.useLoaderData();
+  const { programSlug } = Route.useLoaderData();
+  const program = programs.find((p) => p.slug === programSlug)!;
   const Icon = program.icon;
   const others = programs.filter((p) => p.slug !== program.slug);
 
